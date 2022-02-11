@@ -1,0 +1,23 @@
+.container {
+	label {
+		@apply block;
+	}
+	input {
+		@apply border-b-2 px-2 py-1 w-2/4 mt-2;
+	}
+
+	input:focus {
+		@apply border-purple-500 border-b-2 outline-none;
+	}
+	button:hover {
+		@apply transform scale-95 transition-all duration-200 ease-in-out;
+	}
+}
+
+.error-text {
+	@apply text-red-500 mt-2;
+}
+
+.error-text::first-letter {
+	@apply uppercase;
+}
