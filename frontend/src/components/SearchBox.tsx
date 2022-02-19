@@ -1,5 +1,8 @@
+import { InputAdornment, TextField } from '@mui/material';
+import { UseSearchBoxProps, useSearchBox } from 'react-instantsearch-hooks';
 import { useEffect, useRef, useState } from 'react';
-import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch-hooks';
+
+import { Search } from '@mui/icons-material';
 
 export type SearchBoxProps = UseSearchBoxProps;
 
@@ -54,18 +57,24 @@ export function SearchBox(props: SearchBoxProps) {
 				noValidate
 				onSubmit={handleSubmit}
 				onReset={handleReset}>
-				<input
+				<TextField
 					ref={inputRef}
-					className='border-b-2 focus:border-purple-400 outline-none ring-offset-2 w-full p-2 text-lg'
 					autoComplete='off'
 					autoCorrect='off'
 					autoCapitalize='off'
 					placeholder={props.placeholder}
 					spellCheck={false}
-					maxLength={512}
 					type='search'
 					value={inputValue}
 					onChange={(event) => setInputValue(event.currentTarget.value)}
+					InputProps={{
+						endAdornment: (
+							<InputAdornment position='end'>
+								<Search />
+							</InputAdornment>
+						),
+					}}
+					sx={{ width: '100%' }}
 				/>
 			</form>
 		</div>
