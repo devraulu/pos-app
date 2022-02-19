@@ -2,11 +2,18 @@
 	"name": "pos-app",
 	"version": "0.0.0",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host",
 		"build": "tsc && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.7.1",
+		"@emotion/styled": "^11.6.0",
+		"@fontsource/roboto": "^4.5.3",
+		"@mui/icons-material": "^5.4.1",
+		"@mui/material": "^5.4.1",
+		"@reach/router": "^1.3.4",
+		"@reduxjs/toolkit": "^1.7.2",
 		"algoliasearch": "^4.12.1",
 		"firebase": "^9.6.6",
 		"formik": "^2.2.9",
@@ -18,12 +25,11 @@
 		"yup": "^0.32.11"
 	},
 	"devDependencies": {
+		"@emotion/babel-plugin": "^11.7.2",
+		"@types/reach__router": "^1.3.10",
 		"@types/react": "^17.0.33",
 		"@types/react-dom": "^17.0.10",
 		"@vitejs/plugin-react": "^1.0.7",
-		"autoprefixer": "^10.4.2",
-		"postcss": "^8.4.6",
-		"tailwindcss": "^3.0.19",
 		"typescript": "^4.4.4",
 		"vite": "^2.7.2"
 	}
