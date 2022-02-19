@@ -1,5 +1,20 @@
+import { Box, Button, Grid, Pagination } from '@mui/material';
+import { ChangeEvent, useReducer, useState } from 'react';
+import {
+	UseHitsProps,
+	useConfigure,
+	useCurrentRefinements,
+	useHits,
+	useHitsPerPage,
+	useInfiniteHits,
+	usePagination,
+	useSearchBox,
+} from 'react-instantsearch-hooks';
+
 import { Hit as AlgoliaHit } from '@algolia/client-search';
-import { useHits, UseHitsProps } from 'react-instantsearch-hooks';
+import DeleteDialog from './common/DeleteDialog';
+import { deleteDocByID } from '../utils';
+import { toast } from 'react-toastify';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> &
 	UseHitsProps & {
@@ -9,16 +24,75 @@ export type HitsProps<THit> = React.ComponentProps<'div'> &
 export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 	hitComponent: Hit,
 }: HitsProps<THit>) {
-	const { hits } = useHits();
-	console.log('Hits', JSON.stringify(hits));
+	// const { hits, showMore, results, isLastPage, currentPageHits } =
+	// 	useInfiniteHits();
+	const { refine: refineSearchBox, clear } = useSearchBox();
+	const { hits, results } = useHits();
+	const configureHPP = useHitsPerPage({
+		items: [{ value: 30, label: 'Default', default: true }],
+	});
+	const { nbPages, refine, isLastPage } = usePagination();
+	console.log('Results', results);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [productName, setProductName] = useState('');
+	const [productId, setProductId] = useState('');
+
+	const handleDelete = (id: string, productName: string) => {
+		setOpenDialog(true);
+		setProductId(id);
+		setProductName(productName);
+	};
+
+	const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+		refine(value);
+	};
+
+	const handleConfirmDelete = () => {
+		try {
+			deleteDocByID(productId);
+			setOpenDialog(false);
+			setProductId('');
+			setProductName('');
+			toast.success('Producto eliminado');
+			refineSearchBox(' ');
+		} catch (e) {
+			toast.error((e as Error).message);
+		}
+	};
+
 	return (
-		<div className='mt-4 grid grid-cols-6 gap-4'>
-			{hits.length > 0 &&
-				hits.map((hit) => (
-					<div key={hit.objectID} className='ais-Hits-item'>
-						<Hit hit={hit as unknown as THit} />
-					</div>
-				))}
-		</div>
+		<>
+			<DeleteDialog
+				open={openDialog}
+				handleConfirm={handleConfirmDelete}
+				handleCancel={() => setOpenDialog(false)}
+				productName={productName}
+			/>
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+				}}>
+				<Grid container sx={{ mt: 5 }} spacing={4}>
+					{hits.length > 0 &&
+						hits.map((hit) => (
+							<Grid item xs={2}>
+								<Hit
+									key={hit?.objectID}
+									hit={hit as unknown as THit}
+									handleDelete={() => handleDelete(hit?.objectID, hit?.name)}
+								/>
+							</Grid>
+						))}
+				</Grid>
+				<Pagination
+					count={nbPages}
+					onChange={handlePageChange}
+					size='large'
+					sx={{ mt: 4 }}
+				/>
+			</Box>
+		</>
 	);
 }
