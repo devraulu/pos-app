@@ -5,7 +5,7 @@ export type Product = {
 	price: number;
 	category: string;
 	img: string;
-	createdAt: number;
-	updatedAt: number;
-	createdBy: string;
+	createdAt?: number;
+	updatedAt?: number;
+	createdBy?: string;
 };
