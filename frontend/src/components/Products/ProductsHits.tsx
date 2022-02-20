@@ -12,8 +12,8 @@ import {
 } from 'react-instantsearch-hooks';
 
 import { Hit as AlgoliaHit } from '@algolia/client-search';
-import DeleteDialog from './common/DeleteDialog';
-import { deleteDocByID } from '../utils';
+import DeleteDialog from '../common/DeleteDialog';
+import { deleteDocByID } from '../../utils';
 import { toast } from 'react-toastify';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> &
@@ -67,6 +67,7 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 				handleConfirm={handleConfirmDelete}
 				handleCancel={() => setOpenDialog(false)}
 				productName={productName}
+				message={<>Delete product with name: <strong>{productName}</strong></>}
 			/>
 			<Box
 				sx={{

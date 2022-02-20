@@ -6,14 +6,17 @@ import {
 	DialogContentText,
 	DialogTitle,
 } from '@mui/material';
+import { ReactNode } from 'react';
 
 type Props = {
 	open: boolean;
 	handleCancel: () => void;
 	handleConfirm: () => void;
 	productName: string;
+	message: string | ReactNode;
 };
 export default function DeleteDialog({
+	message,
 	open,
 	handleCancel,
 	handleConfirm,
@@ -23,7 +26,7 @@ export default function DeleteDialog({
 		<Dialog open={open}>
 			<DialogContent>
 				<DialogContentText>
-					Delete product with name: <strong>{productName}</strong>
+					<>{message}</>
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>

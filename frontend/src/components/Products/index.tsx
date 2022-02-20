@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
-import { Hits } from '../Hits';
-import { SearchBox } from '../SearchBox';
+import { Hits } from './ProductsHits';
+import { SearchBox } from '../common/SearchBox';
 import ProductCard from './ProductCard';
 
 export default function Products() {
