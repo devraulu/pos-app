@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Search } from '@mui/icons-material';
 
-export type SearchBoxProps = UseSearchBoxProps;
+export type SearchBoxProps = UseSearchBoxProps & { placeholder?: string };
 
 export function SearchBox(props: SearchBoxProps) {
 	const { query, refine, isSearchStalled } = useSearchBox(props);
