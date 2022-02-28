@@ -1,4 +1,4 @@
-import AddProduct from '../components/Products/AddProduct';
+import AddProduct from 'components/Products/AddProduct';
 import { RouteComponentProps } from '@reach/router';
 
 interface Props extends RouteComponentProps {}

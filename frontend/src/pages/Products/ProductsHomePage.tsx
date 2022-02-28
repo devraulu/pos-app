@@ -1,7 +1,7 @@
-import Products from '../components/Products';
+import Products from 'components/Products';
 import { RouteComponentProps } from '@reach/router';
 
-type Props = {} & RouteComponentProps;
+interface Props extends RouteComponentProps {}
 
 export default function ProductsHomePage({}: Props) {
 	return <Products />;

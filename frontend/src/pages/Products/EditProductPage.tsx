@@ -1,7 +1,6 @@
 import { RouteComponentProps, useParams } from '@reach/router';
 
-import EditProduct from '../components/Products/EditProduct';
-import React from 'react';
+import EditProduct from 'components/Products/EditProduct';
 
 interface Props extends RouteComponentProps {}
 
