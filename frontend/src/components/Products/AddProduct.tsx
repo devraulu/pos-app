@@ -14,23 +14,18 @@ import { ProductSchema } from '../../schemas';
 import { css } from '@emotion/react';
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
+import { formatProduct } from 'utils';
 
 export default function AddProduct() {
 	const handleSubmit = async (
 		values: Product,
 		{ setSubmitting, resetForm }: FormikHelpers<Product>
 	) => {
-		if (!values.img)
-			values.img =
-				'https://via.placeholder.com/150/000000/FFFFFF/?text=' + values.name;
 		try {
-			const docRef = await addDoc(collection(db, 'products'), {
-				...values,
-				category: values.category.toUpperCase(),
-				name: values.name.toUpperCase(),
-				createdAt: serverTimestamp(),
-				updatedAt: serverTimestamp(),
-			});
+			const docRef = await addDoc(
+				collection(db, 'products'),
+				formatProduct(values)
+			);
 			console.log('docRef:', docRef);
 			toast.success('Se guardo el producto correctamente');
 			resetForm();
@@ -42,10 +37,11 @@ export default function AddProduct() {
 			setSubmitting(false);
 		}
 	};
+
 	return (
 		<Box sx={{ p: 5 }}>
 			<Typography variant='h2' noWrap>
-				Add product
+				Agregar producto
 			</Typography>
 			<Box sx={{ mt: 3 }}>
 				<Formik
