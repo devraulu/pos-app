@@ -64,7 +64,7 @@ export default function POSAppBar() {
 					<Box>
 						<Button
 							variant='outlined'
-							href='/despachar'
+							href='/checkout'
 							css={css`
 								color: black;
 								border-color: black;
