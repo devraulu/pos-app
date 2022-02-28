@@ -9,3 +9,12 @@ export type Product = {
 	updatedAt?: number;
 	createdBy?: string;
 };
+
+export type Client = {
+	name: string;
+	createdAt?: number;
+	updatedAt?: number;
+	createdBy?: string;
+} & Record<string, any>;
+
+export type ClientHits = Client & {};
