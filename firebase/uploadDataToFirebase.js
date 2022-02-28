@@ -6,7 +6,7 @@ admin.initializeApp({
 	databaseURL: 'https://pos-app-1ad0d.firebaseio.com',
 });
 
-const data = require('./MOCK_DATA.json');
+const data = require('./MOCK_PRODUCTS.json');
 
 /**
  * Data is a collection if
