@@ -66,8 +66,11 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 				open={openDialog}
 				handleConfirm={handleConfirmDelete}
 				handleCancel={() => setOpenDialog(false)}
-				productName={productName}
-				message={<>Delete product with name: <strong>{productName}</strong></>}
+				message={
+					<>
+						Delete product with name: <strong>{productName}</strong>
+					</>
+				}
 			/>
 			<Box
 				sx={{
@@ -78,7 +81,7 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 				<Grid container sx={{ mt: 5 }} spacing={4}>
 					{hits.length > 0 &&
 						hits.map((hit) => (
-							<Grid item xs={2}>
+							<Grid item xs={3}>
 								<Hit
 									key={hit?.objectID}
 									hit={hit as unknown as THit}
