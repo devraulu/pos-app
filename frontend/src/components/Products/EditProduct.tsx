@@ -8,7 +8,7 @@ import { Product } from '../../models';
 import { ProductSchema } from '../../schemas';
 import { css } from '@emotion/react';
 import { db } from '../../firebase';
-import { getDocByID } from '../../utils';
+import { formatProduct, getDocByID } from '../../utils';
 import { toast } from 'react-toastify';
 
 type Props = { id: string };
@@ -71,18 +71,11 @@ export default function EditProduct({ id }: Props) {
 					<Formik
 						initialValues={product || ({} as Product)}
 						onSubmit={async (values, { setSubmitting, resetForm }) => {
-							if (!values.img)
-								values.img =
-									'https://via.placeholder.com/150/000000/FFFFFF/?text=' +
-									values.name;
 							try {
-								const docRef =
-									(await updateDoc(doc(db, 'products', id), {
-										...values,
-										category: values.category.toUpperCase(),
-										name: values.name.toUpperCase(),
-										updatedAt: serverTimestamp(),
-									})) != null;
+								const docRef = await updateDoc(
+									doc(db, 'products', id),
+									formatProduct(values)
+								);
 								console.log('docRef:', docRef);
 								toast.success('Se guardo el producto correctamente');
 							} catch (e) {

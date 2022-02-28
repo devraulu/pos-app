@@ -6,6 +6,7 @@ import {
 	CardMedia,
 	Typography,
 } from '@mui/material';
+import { css } from '@emotion/react';
 
 import { FixMeLater } from '../../models';
 
@@ -22,9 +23,13 @@ export default function ProductCard({ hit, handleDelete }: Props) {
 				fontSize={14}>
 				{hit?.category.toUpperCase()}
 			</Typography>
-			<CardMedia image={hit?.img} alt='product' component='img' height={100} />
+			<CardMedia image={hit?.img} alt='product' component='img' height={150} />
 			<CardContent>
-				<Typography gutterBottom variant='h5' component='h2'>
+				<Typography
+					gutterBottom
+					variant='h5'
+					component='h2'
+					className='text-truncate'>
 					{hit?.name}
 				</Typography>
 				<Typography variant='h6' component='h3' color='text-secondary'>
