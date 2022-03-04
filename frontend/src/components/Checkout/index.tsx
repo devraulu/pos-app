@@ -1,8 +1,10 @@
 import { Box, Grid } from '@mui/material';
 
+import BarcodeScanner from './BarcodeScanner';
 import CheckoutHits from './CheckoutHits';
 import ProductsInstantSearch from 'components/Products/ProductsInstantSearch';
 import ProductsSearch from './ProductsSearch';
+import { css } from '@emotion/react';
 
 export default function Checkout() {
 	return (
@@ -10,7 +12,16 @@ export default function Checkout() {
 			<Grid item xs={8}>
 				<Box>
 					<ProductsInstantSearch>
-						<ProductsSearch />
+						<Box sx={{ display: 'flex', alignItems: 'center' }}>
+							<ProductsSearch />
+							<BarcodeScanner
+								cssProp={css`
+									margin-left: 1rem;
+									width: 100px;
+									height: 100px;
+								`}
+							/>
+						</Box>
 						<CheckoutHits />
 					</ProductsInstantSearch>
 				</Box>
@@ -23,10 +34,7 @@ export default function Checkout() {
 							// heigth: 100,
 							// width: 100,
 						}
-					}>
-
-
-</Box>
+					}></Box>
 			</Grid>
 		</Grid>
 	);
