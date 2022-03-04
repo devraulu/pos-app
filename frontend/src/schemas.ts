@@ -15,8 +15,7 @@ export const ProductSchema = yup.object().shape({
 		.required('La categoria es requerida'),
 });
 
-const phoneRegExp =
-	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 
 export const ClientSchema = yup.object().shape({
 	name: yup
@@ -29,7 +28,7 @@ export const ClientSchema = yup.object().shape({
 		.string()
 		.matches(phoneRegExp, 'No es un teléfono válido')
 		.required('El teléfono es requerido'),
-	rnc: yup.number().positive().min(4, 'Muy corto').max(100, 'Muy largo'),
+	rnc: yup.string().matches(/[0-9]/).min(10, 'Muy corto').max(10, 'Muy largo'),
 	address: yup
 		.string()
 		.min(10, 'Muy corto')
@@ -41,11 +40,9 @@ export const ClientSchema = yup.object().shape({
 		.min(5000, 'Debe ser mayor a {0}')
 		.max(500000, 'Debe ser menor a {0}')
 		.required('El límite de crédito es requerido'),
-	balance: yup
-		.number()
-		.negative('Debe ser negativo o 0')
-		.required('El saldo es requerido'),
+	balance: yup.number().required('El saldo es requerido'),
 });
+
 const client = {
 	name: 'Blanda, Casper and Thompson',
 	email: 'cseston1@bravesites.com',
