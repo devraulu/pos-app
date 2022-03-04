@@ -3,8 +3,12 @@ import { UseSearchBoxProps, useSearchBox } from 'react-instantsearch-hooks';
 import { useEffect, useRef, useState } from 'react';
 
 import { Search } from '@mui/icons-material';
+import { css } from '@emotion/react';
 
-export type SearchBoxProps = UseSearchBoxProps & { placeholder?: string };
+export type SearchBoxProps = UseSearchBoxProps & {
+	placeholder?: string;
+	className?: string;
+};
 
 export function SearchBox(props: SearchBoxProps) {
 	const { query, refine, isSearchStalled } = useSearchBox(props);
@@ -50,7 +54,11 @@ export function SearchBox(props: SearchBoxProps) {
 	}, [query]);
 
 	return (
-		<div className='ais-SearchBox'>
+		<div
+			className='ais-SearchBox'
+			css={css`
+				flex-grow: 1;
+			`}>
 			<form
 				action=''
 				className=''
