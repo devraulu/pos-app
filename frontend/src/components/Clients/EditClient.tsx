@@ -1,14 +1,14 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
+import { ClientSchema, ProductSchema } from 'schemas';
 import { Form, Formik } from 'formik';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { formatClient, getDocByID } from 'utils';
 import { useEffect, useState } from 'react';
 
-import FormikTextField from 'components/common/FormikTextField';
 import { Client } from 'models';
-import { ClientSchema, ProductSchema } from 'schemas';
+import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
 import { db } from 'firebase';
-import { formatClient, getDocByID } from 'utils';
 import { toast } from 'react-toastify';
 
 type Props = { id: string };
@@ -94,16 +94,22 @@ export default function EditClient({ id }: Props) {
 									gap: 20px;
 									width: 50%;
 								`}>
-								<FormikTextField name='name' label='Nombre' />
-								<FormikTextField name='price' label='Precio' />
-								<FormikTextField name='category' label='Categoria' />
-								<FormikTextField name='img' label='Imagen del producto' />
+								<FormikTextField name='name' label='Nombre de la compañía' />
+								<FormikTextField name='email' label='Email' type='email' />
+								<FormikTextField name='phone' label='Teléfono' />
+								<FormikTextField name='rnc' label='RNC' type='number' />
+								<FormikTextField name='address' label='Dirección' />
+								<FormikTextField
+									name='credit_limit'
+									label='Límite de crédito'
+								/>
+								<FormikTextField name='balance' label='Balance' />
 								<Button
 									disabled={!isValid || isSubmitting}
 									variant='contained'
 									size='large'
 									onClick={submitForm}>
-									Agregar
+									Actualizar
 								</Button>
 							</Form>
 						)}
