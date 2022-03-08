@@ -1,14 +1,17 @@
 import {
-	createTheme,
 	CssBaseline,
 	LinkProps,
 	ThemeProvider,
+	createTheme,
 } from '@mui/material';
 import { green, purple } from '@mui/material/colors';
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import App from './App';
 import LinkBehavior from './components/mui/LinkBehavior';
+import { Provider } from 'react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { store } from 'store';
 
 const theme = createTheme({
 	palette: {
@@ -28,7 +31,9 @@ ReactDOM.render(
 	<React.StrictMode>
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</ThemeProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
