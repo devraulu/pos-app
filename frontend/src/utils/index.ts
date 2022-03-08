@@ -38,11 +38,14 @@ export const deleteDocByID = async (
 	await updateDoc(docRef, { deleted: true, updatedAt: serverTimestamp() });
 };
 
-export const formatDGCellToCurrency = (value: GridCellValue) =>
+export const formatToCurrency = (value: string | number) =>
 	Number(value).toLocaleString('en-US', {
 		style: 'currency',
 		currency: 'USD',
 	});
+
+export const formatDGCellToCurrency = (value: GridCellValue) =>
+	formatToCurrency;
 
 export const formatClient = (values: Client) => ({
 	...values,
