@@ -8,6 +8,7 @@ import './App.css';
 
 import AddClientPage from 'pages/Clients/AddClientPage';
 import AddProductPage from 'pages/Products/AddProductPage';
+import { Box } from '@mui/material';
 import CheckoutHomePage from 'pages/Checkout/CheckoutHomePage';
 import CheckoutPage from 'pages/Checkout/CheckoutPage';
 import ClientsHomePage from 'pages/Clients/ClientsHomePage';
@@ -24,7 +25,7 @@ import searchClient from './algolia/searchClient';
 
 function App() {
 	return (
-		<>
+		<Box>
 			<POSAppBar />
 			<Router>
 				<Home path='/' />
@@ -45,7 +46,7 @@ function App() {
 				</CheckoutPage>
 			</Router>
 			<ToastContainer position='top-right' />
-		</>
+		</Box>
 	);
 }
 
