@@ -28,8 +28,8 @@ const Cart: FunctionComponent<CartProps> = () => {
 			height={'100%'}
 			justifyContent={'space-between'}>
 			<Paper sx={{ width: '100%', overflow: 'hidden' }}>
-				<TableContainer sx={{ maxHeight: 440 }}>
-					<Table>
+				<TableContainer sx={{ maxHeight: 400 }}>
+					<Table stickyHeader>
 						<TableHead>
 							<TableRow>
 								<TableCell align='center' colSpan={3}>
