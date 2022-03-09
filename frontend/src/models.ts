@@ -20,4 +20,6 @@ export type Client = {
 	createdBy?: string;
 } & Record<string, any>;
 
+
+
 export type ClientHits = Client & {};

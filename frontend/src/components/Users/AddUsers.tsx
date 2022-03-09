@@ -17,16 +17,16 @@ export default function AddClient() {
 	) => {
 		try {
 			const docRef = await addDoc(
-				collection(db, 'clients'),
+				collection(db, 'Users'),
 				formatClient(values)
 			);
 			console.log('docRef:', docRef);
-			toast.success('Se guardo el cliente correctamente');
+			toast.success('Se guardo el usuario correctamente');
 			resetForm();
 		} catch (e) {
 			console.log(e);
 			resetForm();
-			toast.error('Error guardando el cliente');
+			toast.error('Error guardando el usuario');
 		} finally {
 			setSubmitting(false);
 		}
@@ -49,13 +49,13 @@ export default function AddClient() {
 								gap: 20px;
 								width: 50%;
 							`}>
-							<FormikTextField name='name' label='Nombre de la compañía' />
+							<FormikTextField name='user_name' label='Nombre de usuario' />
+							<FormikTextField name='name' label='Nombre Completo'/>
+							<FormikTextField name='passWord' label='Contraseña' />
+							<FormikTextField name='PassWord_Confirm' label='Confirmaciones Contraseña'/>
+							<FormikTextField name='cell_phone_number' label='Numero de telefono' />
 							<FormikTextField name='email' label='Email' type='email' />
-							<FormikTextField name='phone' label='Teléfono' />
-							<FormikTextField name='rnc' label='RNC' type='number' />
-							<FormikTextField name='address' label='Dirección' />
-							<FormikTextField name='credit_limit' label='Límite de crédito' />
-							<FormikTextField name='balance' label='Balance' />
+							{/* faltan los checkbox de genero */}
 							<Button
 								disabled={!isValid || isSubmitting}
 								variant='contained'

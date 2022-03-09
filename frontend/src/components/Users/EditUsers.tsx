@@ -13,27 +13,27 @@ import { toast } from 'react-toastify';
 
 type Props = { id: string };
 
-export default function EditClient({ id }: Props) {
-	const [client, setClient] = useState<null | Client>(null);
+export default function EditUser({ id }: Props) {
+	const [Users, setUser] = useState<null | >(null);
 	const [error, setError] = useState<null | string>(null);
 
-	const getClient = async () => {
+	const getUsers = async () => {
 		try {
 			const data = await getDocByID(id, 'clients');
-			setClient(data);
+			setUser(data);
 		} catch (e) {
 			setError((e as Error).message);
 		}
 	};
 
 	useEffect(() => {
-		getClient();
+		getUsers();
 	}, []);
 
 	return (
 		<Box sx={{ p: 5 }}>
 			<Typography variant='h2' noWrap>
-				Edit client
+				Edit User
 			</Typography>
 
 			{!client && !error && (
