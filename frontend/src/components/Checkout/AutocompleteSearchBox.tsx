@@ -27,11 +27,15 @@ const AutocompleteSearchBox: FunctionComponent<AutocompleteSearchBoxProps> = (
 	props
 ) => {
 	const { query, refine, isSearchStalled } = useSearchBox(props);
-	const [value, setValue] = useState(null);
-	const [inputValue, setInputValue] = useState(query);
 	const { hits } = useInfiniteHits();
+
+	const [sortedHits, setSortedHits] = useState<null | typeof hits>(null);
+	const [inputValue, setInputValue] = useState<null | string>(query || '');
+
 	const debouncedValue = useDebounce(inputValue);
+
 	const dispatch = useAppDispatch();
+
 	const handleChange = (
 		event: React.SyntheticEvent<Element, Event>,
 		value: any | null,
@@ -47,29 +51,31 @@ const AutocompleteSearchBox: FunctionComponent<AutocompleteSearchBoxProps> = (
 			return;
 		}
 		dispatch(addToCart(value));
-		setValue(null);
+		setInputValue(null);
 	};
 
 	useEffect(() => {
 		if (query !== debouncedValue) {
-			refine(debouncedValue);
+			refine(debouncedValue || '');
 		}
 	}, [debouncedValue, refine]);
+
+	useEffect(() => {
+		setSortedHits(
+			hits.sort((a, b) =>
+				(a.category as string).localeCompare(b.category as string)
+			)
+		);
+	}, [hits]);
 
 	return (
 		<Autocomplete
 			fullWidth
-			autoHighlight
-			clearOnBlur
 			size='small'
-			value={value}
+			value={inputValue}
 			noOptionsText='No products found'
 			onChange={handleChange}
-			options={
-				hits.sort((a, b) =>
-					(a.category as string).localeCompare(b.category as string)
-				) || []
-			}
+			options={sortedHits}
 			groupBy={(option) => option.category}
 			renderOption={(props, option, { selected }) => (
 				<li {...props}>
@@ -86,14 +92,8 @@ const AutocompleteSearchBox: FunctionComponent<AutocompleteSearchBoxProps> = (
 					{...params}
 					inputProps={{
 						...params.inputProps,
-						autoComplete: 'off',
-						autoCorrect: 'off',
-						autoCapitalize: 'off',
-						spellCheck: false,
 					}}
-					value={inputValue}
-					onChange={(event) => setInputValue(event.currentTarget.value)}
-					placeholder='Producto'
+					label='Producto'
 				/>
 			)}
 		/>
