@@ -1,6 +1,6 @@
 import { Configure, InstantSearch } from 'react-instantsearch-hooks';
 
-import ClientsInstantSearch from 'components/Clients/ClientsInstantSearch';
+import ClientsInstantSearch from 'components/Users/UsersInstantSearch';
 import { ReactNode } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import searchClient from 'algolia/searchClient';

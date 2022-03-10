@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import { Hit as AlgoliaHit } from '@algolia/client-search';
-import ClientsDG from './UsersDG';
+import UserDG from './UsersDG';
 import { css } from '@emotion/react';
 import { navigate } from '@reach/router';
 
@@ -40,7 +40,7 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 
 	// const handleSort = (model: GridSortModel, details: GridCallbackDetails) => {};
 
-	const ClientsDGProps = {
+	const UsersDGProps = {
 		hits,
 		nbHits,
 		hitsPerPage: hpp,
@@ -51,7 +51,7 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 	return (
 		<>
 			<Box sx={{ w: 100, mt: 4 }}>
-				<ClientsDG {...ClientsDGProps} />
+				<UserDG {...UsersDGProps} />
 			</Box>
 		</>
 	);

@@ -1,8 +1,8 @@
-import Clients from 'components/Clients';
+import Users from 'components/Users';
 import { RouteComponentProps } from '@reach/router';
 
 interface Props extends RouteComponentProps {}
 
-export default function ClientsHomePage({}: Props) {
-	return <Clients />;
+export default function UsersHomePage({}: Props) {
+	return <Users />;
 }

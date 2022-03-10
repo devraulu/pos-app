@@ -1,3 +1,5 @@
+import { string } from "yup/lib/locale";
+
 export type FixMeLater = any;
 
 export type Product = {
@@ -20,6 +22,11 @@ export type Client = {
 	createdBy?: string;
 } & Record<string, any>;
 
-
+export type User = {
+	user_name: string;
+	name: string;
+	phone: number;
+	email: string;
+};
 
 export type ClientHits = Client & {};

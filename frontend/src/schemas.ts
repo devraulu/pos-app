@@ -55,3 +55,21 @@ const client = {
 	updatedAt: '1627944112000',
 	phone: '+86 (183) 111-7411',
 };
+
+export const UserSchema = yup.object().shape({
+	name: yup
+		.string()
+		.min(4, 'Muy corto')
+		.max(100, 'Muy largo')
+		.required('El nombre es requerido'),
+	user_name: yup
+		.string()
+		.min(4, 'Muy corto')
+		.max(100, 'Muy largo')
+		.required('El nombre de usuario es requerido'),
+	email: yup.string().email().required('El email es requerido'),
+	phone: yup
+		.string()
+		.matches(phoneRegExp, 'No es un teléfono válido')
+		.required('El teléfono es requerido'),	
+});

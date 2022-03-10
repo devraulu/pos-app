@@ -6,14 +6,14 @@ import FormikTextField from '../common/FormikTextField';
 import { css } from '@emotion/react';
 import { db } from '../../firebase';
 import { toast } from 'react-toastify';
-import { Client } from '../../models';
-import { ClientSchema } from '../../schemas';
+import { User } from '../../models';
+import { UserSchema } from '../../schemas';
 import { formatClient } from 'utils';
 
-export default function AddClient() {
+export default function AddUsers() {
 	const handleSubmit = async (
-		values: Client,
-		{ setSubmitting, resetForm }: FormikHelpers<Client>
+		values: User,
+		{ setSubmitting, resetForm }: FormikHelpers<User>
 	) => {
 		try {
 			const docRef = await addDoc(
@@ -38,9 +38,9 @@ export default function AddClient() {
 			</Typography>
 			<Box sx={{ mt: 3 }}>
 				<Formik
-					initialValues={{} as Client}
+					initialValues={{} as User}
 					onSubmit={handleSubmit}
-					validationSchema={ClientSchema}>
+					validationSchema={UserSchema}>
 					{({ isValid, submitForm, isSubmitting }) => (
 						<Form
 							css={css`
@@ -51,9 +51,7 @@ export default function AddClient() {
 							`}>
 							<FormikTextField name='user_name' label='Nombre de usuario' />
 							<FormikTextField name='name' label='Nombre Completo'/>
-							<FormikTextField name='passWord' label='Contraseña' />
-							<FormikTextField name='PassWord_Confirm' label='Confirmaciones Contraseña'/>
-							<FormikTextField name='cell_phone_number' label='Numero de telefono' />
+							<FormikTextField name='phone' label='Numero de telefono' />
 							<FormikTextField name='email' label='Email' type='email' />
 							{/* faltan los checkbox de genero */}
 							<Button

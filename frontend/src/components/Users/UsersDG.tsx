@@ -30,6 +30,10 @@ export default function ClientsDG({
 	const [modal, setModal] = useState(false);
 	const columns: Array<GridColDef | GridActionsColDef> = [
 		{
+			field: 'user_name',
+			headerName: 'Nombre de Usuario',
+		},
+		{
 			field: 'name',
 			headerName: 'Nombre',
 			sortable: true,
@@ -46,29 +50,6 @@ export default function ClientsDG({
 			width: 150,
 		},
 		{
-			field: 'rnc',
-			headerName: 'RNC',
-		},
-		{
-			field: 'address',
-			headerName: 'Dirección',
-			width: 150,
-		},
-		{
-			field: 'credit_limit',
-			headerName: 'Límite de crédito',
-			valueFormatter: (params: GridValueFormatterParams) =>
-				formatDGCellToCurrency(params.value),
-			width: 150,
-		},
-		{
-			field: 'balance',
-			headerName: 'Balance de cuenta',
-			valueFormatter: (params: GridValueFormatterParams) =>
-				formatDGCellToCurrency(params.value),
-			width: 150,
-		},
-		{
 			field: 'actions',
 			type: 'actions',
 			getActions: (params) => [
@@ -80,7 +61,7 @@ export default function ClientsDG({
 				<GridActionsCellItem
 					icon={<EditIcon />}
 					label='Edit'
-					onClick={() => navigate(`/clients/${params.id}/edit`)}
+					onClick={() => navigate(`/users/${params.id}/edit`)}
 				/>,
 			],
 		},

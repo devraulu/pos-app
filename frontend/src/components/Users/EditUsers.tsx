@@ -1,11 +1,11 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import { ClientSchema, ProductSchema } from 'schemas';
+import { UserSchema, ProductSchema } from 'schemas';
 import { Form, Formik } from 'formik';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { formatClient, getDocByID } from 'utils';
 import { useEffect, useState } from 'react';
 
-import { Client } from 'models';
+import { User } from 'models';
 import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
 import { db } from 'firebase';
@@ -14,12 +14,12 @@ import { toast } from 'react-toastify';
 type Props = { id: string };
 
 export default function EditUser({ id }: Props) {
-	const [Users, setUser] = useState<null | >(null);
+	const [user, setUser] = useState<null | User>(null);
 	const [error, setError] = useState<null | string>(null);
 
-	const getUsers = async () => {
+	const getUser = async () => {
 		try {
-			const data = await getDocByID(id, 'clients');
+			const data = await getDocByID(id, 'Users');
 			setUser(data);
 		} catch (e) {
 			setError((e as Error).message);
@@ -27,7 +27,7 @@ export default function EditUser({ id }: Props) {
 	};
 
 	useEffect(() => {
-		getUsers();
+		getUser();
 	}, []);
 
 	return (
@@ -36,7 +36,7 @@ export default function EditUser({ id }: Props) {
 				Edit User
 			</Typography>
 
-			{!client && !error && (
+			{!user && !error && (
 				<Box
 					css={css`
 						width: 50%;
@@ -66,14 +66,14 @@ export default function EditUser({ id }: Props) {
 					</Typography>
 				</Box>
 			)}
-			{client && !error && (
+			{user && !error && (
 				<Box sx={{ mt: 3 }}>
 					<Formik
-						initialValues={client || ({} as Client)}
+						initialValues={user || ({} as User)}
 						onSubmit={async (values, { setSubmitting, resetForm }) => {
 							try {
 								const docRef = await updateDoc(
-									doc(db, 'clients', id),
+									doc(db, 'Users', id),
 									formatClient(values)
 								);
 								console.log('docRef:', docRef);
@@ -85,7 +85,7 @@ export default function EditUser({ id }: Props) {
 								setSubmitting(false);
 							}
 						}}
-						validationSchema={ClientSchema}>
+						validationSchema={UserSchema}>
 						{({ isValid, submitForm, isSubmitting }) => (
 							<Form
 								css={css`
@@ -94,16 +94,10 @@ export default function EditUser({ id }: Props) {
 									gap: 20px;
 									width: 50%;
 								`}>
-								<FormikTextField name='name' label='Nombre de la compañía' />
+								<FormikTextField name='user_name' label='Nombre de usuario' />
+								<FormikTextField name='name' label='Nombre Completo' />
+								<FormikTextField name='cell_phone_number' label='Numero de telefono' />
 								<FormikTextField name='email' label='Email' type='email' />
-								<FormikTextField name='phone' label='Teléfono' />
-								<FormikTextField name='rnc' label='RNC' type='number' />
-								<FormikTextField name='address' label='Dirección' />
-								<FormikTextField
-									name='credit_limit'
-									label='Límite de crédito'
-								/>
-								<FormikTextField name='balance' label='Balance' />
 								<Button
 									disabled={!isValid || isSubmitting}
 									variant='contained'

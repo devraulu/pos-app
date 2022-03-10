@@ -1,8 +1,8 @@
 import { RouteComponentProps } from '@reach/router';
-import AddClient from 'components/Clients/AddClient';
+import AddUser from 'components/Users/AddUsers';
 
 interface Props extends RouteComponentProps {}
 
 export default function AddClientPage({}: Props) {
-	return <AddClient />;
+	return <AddUser />;
 }

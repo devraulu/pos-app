@@ -10,7 +10,7 @@ import { FixMeLater } from '../../models';
 
 type Props = { hit: FixMeLater; handleDelete: () => void };
 
-export default function ClientCard({ hit, handleDelete }: Props) {
+export default function UserCard({ hit, handleDelete }: Props) {
 	return (
 		<Card>
 			<Typography

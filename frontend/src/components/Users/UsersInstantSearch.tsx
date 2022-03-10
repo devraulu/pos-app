@@ -1,12 +1,12 @@
 import { Configure, InstantSearch } from 'react-instantsearch-hooks';
 
 import { ReactNode } from 'react';
-import searchClient from 'algolia/searchClient';
+import searchUser from 'algolia/searchClient';
 
 type Props = { children: ReactNode };
-export default function ClientsInstantSearch({ children }: Props) {
+export default function UsersInstantSearch({ children }: Props) {
 	return (
-		<InstantSearch searchClient={searchClient} indexName='dev_Clients'>
+		<InstantSearch searchClient={searchUser} indexName='dev_Users'>
 			<Configure hitsPerPage={50} filters='deleted:false' />
 			{children}
 		</InstantSearch>
