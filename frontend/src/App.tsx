@@ -8,13 +8,17 @@ import './App.css';
 
 import AddClientPage from 'pages/Clients/AddClientPage';
 import AddProductPage from 'pages/Products/AddProductPage';
+import AddUserpage from 'pages/Users/AddUsersPage';
 import { Box } from '@mui/material';
 import CheckoutHomePage from 'pages/Checkout/CheckoutHomePage';
 import CheckoutPage from 'pages/Checkout/CheckoutPage';
 import ClientsHomePage from 'pages/Clients/ClientsHomePage';
 import ClientsPage from 'pages/Clients/ClientsPage';
+import UsersPage from 'pages/Users/UsersPage'
 import EditClientPage from 'pages/Clients/EditClientPage';
 import EditProductPage from 'pages/Products/EditProductPage';
+import EditUser from 'pages/Users/EditUsersPage';
+import UsersHomePage from 'pages/Users/UsersHomePage';
 import Home from 'pages/Home';
 import POSAppBar from 'components/POSAppBar';
 import ProductsHomePage from 'pages/Products/ProductsHomePage';
@@ -40,6 +44,12 @@ function App() {
 					<EditClientPage path=':id/edit' />
 					<AddClientPage path='new' />
 				</ClientsPage>
+
+				<UsersPage path='users'>
+					<UsersHomePage path='/' />
+					<EditUser path=':id/edit' />
+					<AddUserpage path='new' />
+				</UsersPage>
 
 				<CheckoutPage path='checkout'>
 					<CheckoutHomePage path='/' />
