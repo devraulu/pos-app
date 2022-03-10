@@ -27,6 +27,12 @@ import { Router } from '@reach/router';
 import { ToastContainer } from 'react-toastify';
 import searchClient from './algolia/searchClient';
 
+import AddTerminalPage from 'pages/Terminals/AddTerminalsPage';
+import EditTerminalPage from 'pages/Terminals/EditTerminalsPage';
+import TerminalsHomePage from 'pages/Terminals/TerminalsHomePage';
+import TerminalsPage from 'pages/Terminals/TerminalsPage';
+
+
 function App() {
 	return (
 		<Box>
@@ -50,6 +56,12 @@ function App() {
 					<EditUser path=':id/edit' />
 					<AddUserpage path='new' />
 				</UsersPage>
+
+				<TerminalsPage path='terminals'>
+					<TerminalsHomePage path='/' />
+					<EditTerminalPage path=':id/edit' />
+					<AddTerminalPage path='new' />
+				</TerminalsPage>
 
 				<CheckoutPage path='checkout'>
 					<CheckoutHomePage path='/' />

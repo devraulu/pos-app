@@ -22,6 +22,8 @@ export type Client = {
 	createdBy?: string;
 } & Record<string, any>;
 
+export type ClientHits = Client & {};
+
 export type User = {
 	user_name: string;
 	name: string;
@@ -29,4 +31,8 @@ export type User = {
 	email: string;
 };
 
-export type ClientHits = Client & {};
+export type Terminal = {
+	name: string;
+	terminal_number: number;
+	user: string;
+}

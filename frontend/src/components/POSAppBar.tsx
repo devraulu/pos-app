@@ -20,6 +20,7 @@ const pages = [
 	{ name: 'Pedidos', path: '/orders' },
 	{ name: 'Clientes', path: '/clients' },
 	{ name: 'Usuarios', path: '/users' },
+	{ name: 'Terminal', path: '/terminals' },
 ];
 
 const settings = [

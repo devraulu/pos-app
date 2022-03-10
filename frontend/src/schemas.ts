@@ -73,3 +73,20 @@ export const UserSchema = yup.object().shape({
 		.matches(phoneRegExp, 'No es un teléfono válido')
 		.required('El teléfono es requerido'),	
 });
+
+export const TerminalSchema = yup.object().shape({
+	name: yup
+		.string()
+		.min(4, 'Muy corto')
+		.max(100, 'Muy largo')
+		.required('El nombre es requerido'),
+	user: yup
+		.string()
+		.min(4, 'Muy corto')
+		.max(100, 'Muy largo')
+		.required('El nombre de usuario es requerido'),
+	terminal_number: yup
+		.string()
+		.matches(phoneRegExp, 'No es un numero válido')
+		.required('El numero de terminal es requerido'),	
+});
