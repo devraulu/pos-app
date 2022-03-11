@@ -18,6 +18,15 @@ export type Client = {
 	createdAt?: number;
 	updatedAt?: number;
 	createdBy?: string;
-} & Record<string, any>;
+	email: string;
+	address: string;
+	deleted: boolean;
+	phone: string;
+	cardCode: string;
+	visits: number;
+	points: number;
+	id?: string;
+	objectID?: string;
+};
 
 export type ClientHits = Client & {};
