@@ -6,10 +6,11 @@ import {
 	GridRowModel,
 	GridValueFormatterParams,
 } from '@mui/x-data-grid';
-import { formatDGCellToCurrency } from '../../utils';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import { navigate } from '@reach/router';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+
 import { CustomPagination } from './CustomPagination';
+import { formatDGCellToCurrency } from '../../utils';
+import { navigate } from '@reach/router';
 import { useState } from 'react';
 
 type Props = {
@@ -55,18 +56,16 @@ export default function ClientsDG({
 			width: 150,
 		},
 		{
-			field: 'credit_limit',
-			headerName: 'Límite de crédito',
-			valueFormatter: (params: GridValueFormatterParams) =>
-				formatDGCellToCurrency(params.value),
-			width: 150,
+			field: 'cardCode',
+			headerName: 'Codigo de tarjeta',
 		},
 		{
-			field: 'balance',
-			headerName: 'Balance de cuenta',
-			valueFormatter: (params: GridValueFormatterParams) =>
-				formatDGCellToCurrency(params.value),
-			width: 150,
+			field: 'visits',
+			headerName: 'Visitas',
+		},
+		{
+			field: 'points',
+			headerName: 'Puntos',
 		},
 		{
 			field: 'actions',
