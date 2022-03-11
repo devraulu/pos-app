@@ -4,20 +4,16 @@ import { FunctionComponent, useState } from 'react';
 import { Client } from 'models';
 import { CreditCard as CreditCardIcon } from '@mui/icons-material';
 import { getDocByID } from 'utils';
-import { selectClient } from 'store/checkout/checkout.slice';
+import { selectClient } from 'store/checkout/checkout.selectors';
+import { stringAvatar } from 'utils/avatar';
 import { toast } from 'react-toastify';
 import { useAppSelector } from 'store/hooks';
 import { useSelector } from 'react-redux';
 
-interface ClientInfoProps {
-	clientID?: string;
-}
+interface ClientInfoProps {}
 
-const ClientInfo: FunctionComponent<ClientInfoProps> = ({ clientID }) => {
-	// const clientID = useAppSelector(selectClient);
-
-	const [client, setClient] = useState<Client>({ name: 'Anonimo' } as Client);
-
+const ClientInfo: FunctionComponent<ClientInfoProps> = () => {
+	const client = useSelector(selectClient);
 	// const getClient = async (id: string) => {
 	// 	try {
 	// 		const data = await getDocByID(id, 'clients');
@@ -32,9 +28,9 @@ const ClientInfo: FunctionComponent<ClientInfoProps> = ({ clientID }) => {
 	return (
 		<Box>
 			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				<Avatar />
+				<Avatar {...stringAvatar(client?.name)} />
 				<Typography variant='h5' component='h2' sx={{ ml: 2 }}>
-					{client?.name}
+					{client?.name || 'Anonimo'}
 				</Typography>
 			</Box>
 			<Box
@@ -44,12 +40,12 @@ const ClientInfo: FunctionComponent<ClientInfoProps> = ({ clientID }) => {
 					width: '100%',
 					mt: 2,
 				}}>
-				<Button variant='contained' size='large' sx={{ width: '40%' }}>
+				{/* <Button variant='contained' size='large' sx={{ width: '40%' }}>
 					<CreditCardIcon />
 				</Button>
 				<Button variant='contained' color='secondary' sx={{ width: '40%' }}>
 					Compras
-				</Button>
+				</Button> */}
 			</Box>
 		</Box>
 	);
