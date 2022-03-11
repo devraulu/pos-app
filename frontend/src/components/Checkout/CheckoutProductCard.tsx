@@ -6,7 +6,6 @@ type Props = { hit: unknown };
 
 export default function CheckoutProductCard({ hit }: Props) {
 	const { category, img, name, price } = hit as Product;
-	console.log('img', img);
 	return (
 		<Card>
 			<Typography
