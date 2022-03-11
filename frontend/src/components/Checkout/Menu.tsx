@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 
+import PayButton from './PayButton';
+
 interface MenuProps {}
 
 const Menu: React.FunctionComponent<MenuProps> = () => {
@@ -9,9 +11,7 @@ const Menu: React.FunctionComponent<MenuProps> = () => {
 		<Box>
 			<Grid container>
 				<Grid item>
-					<Button variant='contained' color='primary' size='large'>
-						Pay
-					</Button>
+					<PayButton />
 				</Grid>
 			</Grid>
 		</Box>
