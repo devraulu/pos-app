@@ -4,6 +4,8 @@ import { createStructuredSelector } from 'reselect';
 
 export const TAX_RATE = 0.18;
 
+export const selectClient = (state: RootState) => state.checkout.client;
+
 export const selectCartProducts = (state: RootState) => state.checkout.products;
 
 export const selectSubTotal = createSelector(
@@ -33,4 +35,5 @@ export const mapCartState = createStructuredSelector({
 	total: selectTotal,
 	subTotal: selectSubTotal,
 	taxes: selectTax,
+	client: selectClient,
 });
