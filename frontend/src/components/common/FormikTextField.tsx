@@ -1,4 +1,4 @@
-import { Client, Product } from 'models';
+import { Client, Product, User } from 'models';
 import { Field, useFormikContext } from 'formik';
 
 import { TextField } from '@mui/material';

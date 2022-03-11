@@ -1,3 +1,5 @@
+import { string } from "yup/lib/locale";
+
 export type FixMeLater = any;
 
 export type Product = {
@@ -30,3 +32,16 @@ export type Client = {
 };
 
 export type ClientHits = Client & {};
+
+export type User = {
+	user_name: string;
+	name: string;
+	phone: number;
+	email: string;
+};
+
+export type Terminal = {
+	name: string;
+	terminal_number: number;
+	user: string;
+}
