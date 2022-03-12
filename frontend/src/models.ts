@@ -1,3 +1,5 @@
+import { Email } from '@mui/icons-material';
+
 export type FixMeLater = any;
 
 export type Product = {
@@ -30,3 +32,8 @@ export type Client = {
 };
 
 export type ClientHits = Client & {};
+
+export interface ILogin {
+	email: string;
+	password: string;
+}
