@@ -6,6 +6,8 @@ import '@fontsource/roboto/700.css';
 import './index.css';
 import './App.css';
 
+import { Redirect, Router } from '@reach/router';
+
 import AddClientPage from 'pages/Clients/AddClientPage';
 import AddProductPage from 'pages/Products/AddProductPage';
 import { Box } from '@mui/material';
@@ -16,37 +18,28 @@ import ClientsPage from 'pages/Clients/ClientsPage';
 import EditClientPage from 'pages/Clients/EditClientPage';
 import EditProductPage from 'pages/Products/EditProductPage';
 import Home from 'pages/Home';
-import POSAppBar from 'components/POSAppBar';
+import LoginPage from 'pages/Auth/LoginPage';
+import LogoutPage from 'pages/Auth/LogoutPage';
+import POSAppBar from 'components/AppBar';
 import ProductsHomePage from 'pages/Products/ProductsHomePage';
 import ProductsPage from 'pages/Products/ProductsPage';
-import { Router } from '@reach/router';
+import ProtectedRoutes from 'pages/Auth/ProtectedRoutes';
+import PublicRoutes from 'pages/Auth/PublicRoutes';
 import { ToastContainer } from 'react-toastify';
-import searchClient from './algolia/searchClient';
+import { useSigninCheck } from 'reactfire';
 
 function App() {
-	return (
+	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck();
+	const { signedIn } = signinCheck || {};
+
+	return isSignedInStatus !== 'loading' ? (
 		<Box>
 			<POSAppBar />
-			<Router>
-				<Home path='/' />
-				<ProductsPage path='products'>
-					<ProductsHomePage path='/' />
-					<EditProductPage path=':id/edit' />
-					<AddProductPage path='new' />
-				</ProductsPage>
-
-				<ClientsPage path='clients'>
-					<ClientsHomePage path='/' />
-					<EditClientPage path=':id/edit' />
-					<AddClientPage path='new' />
-				</ClientsPage>
-
-				<CheckoutPage path='checkout'>
-					<CheckoutHomePage path='/' />
-				</CheckoutPage>
-			</Router>
+			{signedIn ? <ProtectedRoutes /> : <PublicRoutes />}
 			<ToastContainer position='top-right' />
 		</Box>
+	) : (
+		<></>
 	);
 }
 
