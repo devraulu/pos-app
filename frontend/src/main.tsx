@@ -4,22 +4,24 @@ import {
 	ThemeProvider,
 	createTheme,
 } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
 
 import App from './App';
+import { FirebaseAppProvider } from 'reactfire';
+import FirebaseComponents from 'components/FirebaseComponents';
 import LinkBehavior from './components/mui/LinkBehavior';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { firebaseConfig } from 'firebase-config';
 import { store } from 'store';
 
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#00bfa5',
+			main: '#2A2D34',
 		},
 		secondary: {
-			main: '#a7ffeb',
+			main: '#8075FF',
 		},
 	},
 	components: {
@@ -32,7 +34,11 @@ ReactDOM.render(
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Provider store={store}>
-				<App />
+				<FirebaseAppProvider firebaseConfig={firebaseConfig}>
+					<FirebaseComponents>
+						<App />
+					</FirebaseComponents>
+				</FirebaseAppProvider>
 			</Provider>
 		</ThemeProvider>
 	</React.StrictMode>,
