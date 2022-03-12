@@ -43,15 +43,7 @@ export const ClientSchema = yup.object().shape({
 	balance: yup.number().required('El saldo es requerido'),
 });
 
-const client = {
-	name: 'Blanda, Casper and Thompson',
-	email: 'cseston1@bravesites.com',
-	rnc: '7268089538',
-	address: '82785 Barby Terrace',
-	credit_limit: 489093.02,
-	balance: 239302.19,
-	deleted: false,
-	createdAt: '1632541515000',
-	updatedAt: '1627944112000',
-	phone: '+86 (183) 111-7411',
-};
+export const LoginSchema = yup.object().shape({
+	email: yup.string().email().required(),
+	password: yup.string().required(),
+});
