@@ -1,67 +1,92 @@
+// The Firebase Admin SDK to access Firestore.
+import * as admin from "firebase-admin";
+// The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
 import * as functions from "firebase-functions";
-import algoliasearch from "algoliasearch";
 
-const ALGOLIA_ID = functions.config().algolia.app_id;
-const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
+admin.initializeApp();
 
-const algoliaclient = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
+interface IUser {
+  uid: string;
+  email: string;
+  password: string;
+  displayName: string;
+  createdAt?: string;
+  createdBy?: string;
+}
 
-const PRODUCTS_INDEX = "dev_Products";
-const CLIENTS_INDEX = "dev_Clients";
+exports.onCreateUser = functions.auth.user().onCreate(async (user) => {
+  const { email } = user || {};
+  const querySnapshot = await admin
+    .firestore()
+    .collection("admins")
+    .where("email", "==", email)
+    .get();
 
-exports.onProductCreated = functions.firestore
-    .document("products/{productId}")
-    .onCreate((snap, context) => {
-      const product = snap.data();
+  const isAdmin = querySnapshot.size > 0;
+  try {
+    if (isAdmin) {
+      await admin.auth().setCustomUserClaims(user.uid, { admin: true });
+      return "User is admin";
+    } else {
+      return "User is not admin";
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+});
 
-      product.objectID = context.params.productId;
+exports.setFirstAdmin = functions.https.onCall(async (data) => {
+  try {
+    console.log("Data", data);
+    await admin.auth().setCustomUserClaims(data?.uid, { admin: true });
+    return "User set as admin";
+  } catch (error) {
+    console.log("Error", error);
+    return error;
+  }
+});
 
-      const index = algoliaclient.initIndex(PRODUCTS_INDEX);
-      return index.saveObject(product);
-    });
+exports.createUser = functions.https.onCall(async (data: IUser, context) => {
+  try {
+    if (context.auth?.token.admin) {
+      await admin.auth().createUser({
+        ...data,
+      });
+      return "User created successfully";
+    } else return "User is not an admin. Cannot create users.";
+  } catch (error) {
+    return error;
+  }
+});
 
-exports.onProductDeleted = functions.firestore
-    .document("products/{productId}")
-    .onDelete((snap, context) => {
-      const index = algoliaclient.initIndex(PRODUCTS_INDEX);
-      return index.deleteObject(context.params.productId);
-    });
+exports.updateUser = functions.https.onCall(async (data: IUser, context) => {
+  try {
+    if (context.auth?.token.admin) {
+      await admin.auth().updateUser(data.uid, {
+        ...data,
+      });
+      return "User updated successfully";
+    } else return "User is not an admin. Cannot update users.";
+  } catch (error) {
+    return error;
+  }
+});
 
-exports.onProductUpdated = functions.firestore
-    .document("products/{productId}")
-    .onUpdate((change, context) => {
-      const product = change.after.data();
+exports.getUsers = functions.https.onCall(async (data, context) => {
+  try {
+    if (context.auth?.token.admin) return await admin.auth().listUsers(1000);
+    else return "User is not an admin. Cannot get users.";
+  } catch (error) {
+    return error;
+  }
+});
 
-      product.objectID = context.params.productId;
-
-      const index = algoliaclient.initIndex(PRODUCTS_INDEX);
-      return index.partialUpdateObject(product);
-    });
-
-exports.onClientCreated = functions.firestore
-    .document("clients/{clientId}")
-    .onCreate((snap, context) => {
-      const client = snap.data();
-
-      client.objectID = context.params.clientId;
-      const index = algoliaclient.initIndex("dev_Clients");
-      return index.saveObject(client);
-    });
-
-exports.onClientDeleted = functions.firestore
-    .document("clients/{clientId}")
-    .onDelete((snap, context) => {
-      const index = algoliaclient.initIndex(CLIENTS_INDEX);
-      return index.deleteObject(context.params.clientId);
-    });
-
-exports.onClientUpdated = functions.firestore
-    .document("client/{clientId}")
-    .onUpdate((change, context) => {
-      const client = change.after.data();
-
-      client.objectID = context.params.clientId;
-
-      const index = algoliaclient.initIndex(CLIENTS_INDEX);
-      return index.partialUpdateObject(client);
-    });
+exports.getUserById = functions.https.onCall(async (data, context) => {
+  try {
+    if (context.auth?.token.admin) return await admin.auth().getUser(data.uid);
+    else return "User is not an admin. Cannot get users.";
+  } catch (error) {
+    return error;
+  }
+});
