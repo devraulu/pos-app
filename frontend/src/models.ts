@@ -1,8 +1,10 @@
+import { FieldValue, serverTimestamp } from 'firebase/firestore';
+
 import { Email } from '@mui/icons-material';
 
 export type FixMeLater = any;
 
-export type Product = {
+export type IProduct = {
 	name: string;
 	price: number;
 	category: string;
@@ -36,4 +38,22 @@ export type ClientHits = Client & {};
 export interface ILogin {
 	email: string;
 	password: string;
+}
+
+export interface ICardInfo {
+	last4Digits: string;
+	nameOnCard: string;
+}
+
+export interface IOrder {
+	products: IProduct[];
+	userID: string;
+	clientID: string;
+	taxes: number;
+	subTotal: number;
+	total: number;
+	createdAt: string | FieldValue;
+	payment: string;
+	cardInfo?: ICardInfo;
+	status: string;
 }
