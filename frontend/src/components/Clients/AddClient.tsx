@@ -2,13 +2,13 @@ import { Box, Button, Typography } from '@mui/material';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
-import FormikTextField from '../common/FormikTextField';
+import { Client } from 'models';
+import { ClientSchema } from 'schemas';
+import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
-import { db } from '../../firebase';
-import { toast } from 'react-toastify';
-import { Client } from '../../models';
-import { ClientSchema } from '../../schemas';
+import { db } from 'firebase-config';
 import { formatClient } from 'utils';
+import { toast } from 'react-toastify';
 
 export default function AddClient() {
 	const handleSubmit = async (

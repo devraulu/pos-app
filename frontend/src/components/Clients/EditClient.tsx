@@ -1,14 +1,14 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import { ClientSchema, ProductSchema } from 'schemas';
 import { Form, Formik } from 'formik';
-import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { formatClient, getDocByID } from 'utils';
 import { useEffect, useState } from 'react';
 
 import { Client } from 'models';
+import { ClientSchema } from 'schemas';
 import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
-import { db } from 'firebase';
+import { db } from 'firebase-config';
 import { toast } from 'react-toastify';
 
 type Props = { id: string };
@@ -20,7 +20,7 @@ export default function EditClient({ id }: Props) {
 	const getClient = async () => {
 		try {
 			const data = await getDocByID(id, 'clients');
-			setClient(data);
+			setClient(data as Client);
 		} catch (e) {
 			setError((e as Error).message);
 		}

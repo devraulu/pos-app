@@ -8,7 +8,7 @@ import {
 } from '@mui/x-data-grid';
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
 
-import { CustomPagination } from './CustomPagination';
+import { CustomPagination } from 'components/common/CustomPagination';
 import { formatDGCellToCurrency } from '../../utils';
 import { navigate } from '@reach/router';
 import { useState } from 'react';
