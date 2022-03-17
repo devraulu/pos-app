@@ -9,8 +9,8 @@ import {
 } from 'firebase/firestore';
 
 import { GridCellValue } from '@mui/x-data-grid';
-import { Product } from 'models';
-import { db } from 'firebase';
+import { IProduct } from 'models';
+import { db } from 'firebase-config';
 import { v4 } from 'uuid';
 
 export const getDataFromDB = async () => {
@@ -26,7 +26,7 @@ export const getDocByID = async (id: string, collectionName = 'products') => {
 	const docRef = doc(db, collectionName, id);
 	const docSnap = await getDoc(docRef);
 
-	if (docSnap.exists()) return docSnap.data() as Product;
+	if (docSnap.exists()) return docSnap.data();
 	else throw new Error('No such document');
 };
 
@@ -56,7 +56,7 @@ export const formatClient = (values: Client) => ({
 	updatedAt: serverTimestamp(),
 });
 
-export const formatProduct = (values: Product) => ({
+export const formatProduct = (values: IProduct) => ({
 	...values,
 	name: values.name.toUpperCase(),
 	category: values.category.toUpperCase(),

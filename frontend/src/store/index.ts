@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import checkoutReducer from './checkout/checkout.slice';
 import createSagaMiddleware from 'redux-saga';
 import { rootReducer } from './rootReducer';
 import { rootSaga } from './rootSaga';
@@ -8,7 +7,7 @@ import { rootSaga } from './rootSaga';
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-	reducer: { checkout: checkoutReducer },
+	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(sagaMiddleware),
 });
