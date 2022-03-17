@@ -7,7 +7,7 @@ import {
 
 import App from './App';
 import { FirebaseAppProvider } from 'reactfire';
-import FirebaseComponents from 'components/FirebaseComponents';
+import FirebaseComponents from 'firebase-config/FirebaseComponents';
 import LinkBehavior from './components/mui/LinkBehavior';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -18,10 +18,10 @@ import { store } from 'store';
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: '#2A2D34',
+			main: '#8075FF',
 		},
 		secondary: {
-			main: '#8075FF',
+			main: '#2A2D34',
 		},
 	},
 	components: {
