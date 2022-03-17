@@ -1,6 +1,5 @@
 import {
 	AppBar,
-	Avatar,
 	Box,
 	Button,
 	Container,
@@ -11,23 +10,26 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
+import { useSigninCheck, useUser } from 'reactfire';
 
 import CheckoutButton from './CheckoutButton';
 import LoginButton from './LoginButton';
 import UserMenu from './UserMenu';
 import { css } from '@emotion/react';
-import { useSigninCheck } from 'reactfire';
+import { useLocation } from '@reach/router';
 
 const pages = [
 	{ name: 'Productos', path: '/products' },
 	{ name: 'Pedidos', path: '/orders' },
 	{ name: 'Clientes', path: '/clients' },
+	{ name: 'Usuarios', path: '/users' },
 ];
 
 export default function POSAppBar() {
-	const {
-		data: { signedIn },
-	} = useSigninCheck();
+	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
+		requiredClaims: { admin: true },
+	});
+	const { signedIn, hasRequiredClaims: isAdmin } = signinCheck || {};
 
 	return (
 		<AppBar position='sticky'>
@@ -37,21 +39,24 @@ export default function POSAppBar() {
 						POS
 					</Typography>
 					<Box sx={{ flexGrow: 1, ml: 2 }}>
-						{pages.map(({ name, path }, i) => (
-							<Button
-								key={path}
-								href={path}
-								variant='text'
-								css={css`
-									color: lightgray;
-									margin-left: 10px;
-									&:first-of-type {
-										margin-left: 0;
-									}
-								`}>
-								{name}
-							</Button>
-						))}
+						{pages.map(
+							({ name, path }, i) =>
+								((isAdmin && name === 'Usuarios') || name !== 'Usuarios') && (
+									<Button
+										key={path}
+										href={path}
+										variant='text'
+										css={css`
+											color: white;
+											margin-left: 10px;
+											&:first-of-type {
+												margin-left: 0;
+											}
+										`}>
+										{name}
+									</Button>
+								)
+						)}
 					</Box>
 
 					{signedIn ? (
