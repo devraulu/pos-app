@@ -1,26 +1,26 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { Form, Formik, FormikValues } from 'formik';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { formatProduct, getDocByID } from 'utils';
 import { useEffect, useState } from 'react';
 
-import FormikTextField from '../common/FormikTextField';
-import { Product } from '../../models';
-import { ProductSchema } from '../../schemas';
+import FormikTextField from 'components/common/FormikTextField';
+import { IProduct } from 'models';
+import { ProductSchema } from 'schemas';
 import { css } from '@emotion/react';
-import { db } from '../../firebase';
-import { formatProduct, getDocByID } from '../../utils';
+import { db } from 'firebase-config';
 import { toast } from 'react-toastify';
 
 type Props = { id: string };
 
 export default function EditProduct({ id }: Props) {
-	const [product, setProduct] = useState<null | Product>(null);
+	const [product, setProduct] = useState<null | IProduct>(null);
 	const [error, setError] = useState<null | string>(null);
 
 	const getProduct = async () => {
 		try {
 			const data = await getDocByID(id);
-			setProduct(data);
+			setProduct(data as IProduct);
 		} catch (e) {
 			setError((e as Error).message);
 		}
@@ -69,7 +69,7 @@ export default function EditProduct({ id }: Props) {
 			{product && !error && (
 				<Box sx={{ mt: 3 }}>
 					<Formik
-						initialValues={product || ({} as Product)}
+						initialValues={product || ({} as IProduct)}
 						onSubmit={async (values, { setSubmitting, resetForm }) => {
 							try {
 								const docRef = await updateDoc(

@@ -8,18 +8,18 @@ import {
 	setDoc,
 } from 'firebase/firestore';
 
-import FormikTextField from '../common/FormikTextField';
-import { Product } from '../../models';
-import { ProductSchema } from '../../schemas';
+import FormikTextField from 'components/common/FormikTextField';
+import { IProduct } from 'models';
+import { ProductSchema } from 'schemas';
 import { css } from '@emotion/react';
-import { db } from '../../firebase';
-import { toast } from 'react-toastify';
+import { db } from 'firebase-config';
 import { formatProduct } from 'utils';
+import { toast } from 'react-toastify';
 
 export default function AddProduct() {
 	const handleSubmit = async (
-		values: Product,
-		{ setSubmitting, resetForm }: FormikHelpers<Product>
+		values: IProduct,
+		{ setSubmitting, resetForm }: FormikHelpers<IProduct>
 	) => {
 		try {
 			const docRef = await addDoc(
@@ -52,7 +52,7 @@ export default function AddProduct() {
 							price: 46783.12,
 							deleted: true,
 							img: 'http://dummyimage.com/146x100.png/dddddd/000000',
-						} as Product
+						} as IProduct
 					}
 					onSubmit={handleSubmit}
 					validationSchema={ProductSchema}>
