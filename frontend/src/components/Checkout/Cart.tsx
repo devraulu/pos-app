@@ -46,8 +46,8 @@ const Cart: FunctionComponent<CartProps> = () => {
 						</TableHead>
 						<TableBody>
 							{cartProducts.length > 0 ? (
-								cartProducts.map(({ name, count, price }) => (
-									<TableRow key={name}>
+								cartProducts.map(({ name, count, price, objectID }) => (
+									<TableRow key={objectID}>
 										<TableCell>{name}</TableCell>
 										<TableCell align='right'>{count}</TableCell>
 										<TableCell align='right'>

@@ -1,7 +1,7 @@
-import { Client, Product } from 'models';
+import { Client, IProduct } from 'models';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-type ProductState = { count: number } & Product;
+type ProductState = { count: number } & IProduct;
 
 interface CheckoutState {
 	products: ProductState[];
@@ -44,7 +44,12 @@ export const checkoutSlice = createSlice({
 	},
 });
 
-export const { addToCart, removeOneFromCart, removeFromCart, setClient } =
-	checkoutSlice.actions;
+export const {
+	addToCart,
+	removeOneFromCart,
+	removeFromCart,
+	setClient,
+	resetCart,
+} = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

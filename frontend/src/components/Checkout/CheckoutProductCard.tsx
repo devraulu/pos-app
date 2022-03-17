@@ -1,11 +1,11 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
-import { Product } from 'models';
+import { IProduct } from 'models';
 
 type Props = { hit: unknown };
 
 export default function CheckoutProductCard({ hit }: Props) {
-	const { category, img, name, price } = hit as Product;
+	const { category, img, name, price } = hit as IProduct;
 	return (
 		<Card>
 			<Typography

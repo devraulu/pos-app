@@ -14,39 +14,42 @@ interface ClientInfoProps {}
 
 const ClientInfo: FunctionComponent<ClientInfoProps> = () => {
 	const client = useSelector(selectClient);
-	// const getClient = async (id: string) => {
-	// 	try {
-	// 		const data = await getDocByID(id, 'clients');
-	// 		setClient(data);
-	// 	} catch (e) {
-	// 		toast.error((e as Error).message);
-	// 	}
-	// };
-
-	// useEffect;
 
 	return (
 		<Box>
 			<Box sx={{ display: 'flex', alignItems: 'center' }}>
 				<Avatar {...stringAvatar(client?.name)} />
-				<Typography variant='h5' component='h2' sx={{ ml: 2 }}>
-					{client?.name || 'Anonimo'}
-				</Typography>
+				<Box sx={{ ml: 2 }}>
+					<Typography variant='h5' component='h2'>
+						{client?.name || 'Anonimo'}
+					</Typography>
+					<Typography>{client?.cardCode}</Typography>
+				</Box>
 			</Box>
+			{client && (
+				<Box
+					sx={{
+						ml: 7,
+						display: 'flex',
+						textAlign: 'center',
+					}}>
+					<Box sx={{ mt: 2 }}>
+						<Typography variant='body1'>Visitas</Typography>
+						<Typography variant='h4'>{client?.visits}</Typography>
+					</Box>
+					<Box sx={{ mt: 2, ml: 3 }}>
+						<Typography variant='body1'>Puntos</Typography>
+						<Typography variant='h4'>{client?.points}</Typography>
+					</Box>
+				</Box>
+			)}
 			<Box
 				sx={{
 					display: 'flex',
 					justifyContent: 'space-between',
 					width: '100%',
 					mt: 2,
-				}}>
-				{/* <Button variant='contained' size='large' sx={{ width: '40%' }}>
-					<CreditCardIcon />
-				</Button>
-				<Button variant='contained' color='secondary' sx={{ width: '40%' }}>
-					Compras
-				</Button> */}
-			</Box>
+				}}></Box>
 		</Box>
 	);
 };
