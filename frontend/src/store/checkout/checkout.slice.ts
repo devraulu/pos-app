@@ -11,6 +11,7 @@ const initialState: CheckoutState = {
 	products: [],
 	client: undefined,
 };
+
 export const checkoutSlice = createSlice({
 	name: 'checkout',
 	initialState,
@@ -22,15 +23,15 @@ export const checkoutSlice = createSlice({
 			if (index !== -1) state.products[index].count += 1;
 			else state.products.push({ ...action.payload, count: 1 });
 		},
-		removeOneFromCart: (state, action: PayloadAction<ProductState>) => {
+		removeOneFromCart: (state, action: PayloadAction<string>) => {
 			const index = state.products.findIndex(
-				(item) => item.objectID === action.payload.objectID
+				(item) => item.objectID === action.payload
 			);
 			if (index !== -1) state.products[index].count -= 1;
 		},
-		removeFromCart: (state, action: PayloadAction<ProductState>) => {
+		removeFromCart: (state, action: PayloadAction<string>) => {
 			const index = state.products.findIndex(
-				(item) => item.objectID === action.payload.objectID
+				(item) => item.objectID === action.payload
 			);
 			if (index !== -1) state.products.splice(index, 1);
 		},
@@ -53,3 +54,4 @@ export const {
 } = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;
+
