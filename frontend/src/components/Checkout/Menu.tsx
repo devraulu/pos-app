@@ -4,8 +4,9 @@ import { Box, Button, Grid } from '@mui/material';
 
 import PayWithCard from './PayWithCard';
 import PayWithCash from './PayWithCash';
+import BarcodeScanner from './BarcodeScanner';
 
-interface MenuProps {}
+interface MenuProps { }
 
 const Menu: React.FunctionComponent<MenuProps> = () => {
 	return (
@@ -16,7 +17,10 @@ const Menu: React.FunctionComponent<MenuProps> = () => {
 				justifyContent: 'flex-end',
 				height: '100%',
 			}}>
-			<Grid container>
+			<Grid container sx={{ justifyContent: 'space-between' }}>
+				<Grid item xs={12}>
+					<BarcodeScanner />
+				</Grid>
 				<Grid
 					item
 					sx={{
