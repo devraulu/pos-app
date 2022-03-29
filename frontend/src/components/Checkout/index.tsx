@@ -1,15 +1,8 @@
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
-import BarcodeScanner from './BarcodeScanner';
-import Cart from './Cart';
-import CheckoutHits from './CheckoutHits';
-import ClientInfo from './ClientInfo';
-import ClientsInstantSearch from 'components/Clients/ClientsInstantSearch';
-import ClientsSearch from './ClientsSearch';
 import Menu from './Menu';
 import Order from './Order';
 import ProductsInstantSearch from 'components/Products/ProductsInstantSearch';
-import ProductsSearch from './ProductsSearch';
 import { css } from '@emotion/react';
 
 export default function Checkout() {
