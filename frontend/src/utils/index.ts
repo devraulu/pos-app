@@ -4,8 +4,10 @@ import {
 	doc,
 	getDoc,
 	getDocs,
+	query,
 	serverTimestamp,
 	updateDoc,
+	where,
 } from 'firebase/firestore';
 
 import { GridCellValue } from '@mui/x-data-grid';
@@ -30,6 +32,15 @@ export const getDocByID = async (id: string, collectionName = 'products') => {
 	else throw new Error('No such document');
 };
 
+export const getDocByCode = async (
+	code: string,
+	collectionName = 'products'
+) => {
+	const q = query(collection(db, collectionName), where('code', '==', code));
+	const querySnapshot = await getDocs(q);
+	return querySnapshot.docs[0];
+};
+
 export const deleteDocByID = async (
 	id: string,
 	collectionName = 'products'
@@ -50,7 +61,7 @@ export const formatDGCellToCurrency = (value: GridCellValue) =>
 export const formatClient = (values: Client) => ({
 	...values,
 	name: values.name.toUpperCase(),
-	address: values.address.toUppercase(),
+	address: values.address.toUpperCase(),
 	email: values.email.toLowerCase(),
 	createdAt: serverTimestamp(),
 	updatedAt: serverTimestamp(),
@@ -67,3 +78,4 @@ export const formatProduct = (values: IProduct) => ({
 });
 
 export const uuid = v4;
+
