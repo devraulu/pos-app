@@ -13,7 +13,7 @@ import {
 	useInfiniteHits,
 	useSearchBox,
 } from 'react-instantsearch-hooks';
-import { addToCart, setClient } from 'store/checkout/checkout.slice';
+import { setClient } from 'store/checkout/checkout.slice';
 
 import { Box } from '@mui/system';
 import { stringAvatar } from 'utils/avatar';
@@ -31,7 +31,6 @@ const ClientsAutocompleteSearchBox: FunctionComponent<
 	const { query, refine, isSearchStalled } = useSearchBox(props);
 	const { hits } = useInfiniteHits();
 
-	const [sortedHits, setSortedHits] = useState<null | typeof hits>(null);
 	const [inputValue, setInputValue] = useState<null | string>(query || '');
 	const debouncedValue = useDebounce(inputValue);
 
@@ -43,7 +42,6 @@ const ClientsAutocompleteSearchBox: FunctionComponent<
 		reason: AutocompleteChangeReason,
 		details?: AutocompleteChangeDetails<any> | undefined
 	) => {
-		console.log('handleChange', event, value, reason, details);
 		if (
 			event.type === 'keydown' &&
 			(event as React.KeyboardEvent).key === 'Backspace' &&
@@ -61,27 +59,21 @@ const ClientsAutocompleteSearchBox: FunctionComponent<
 		}
 	}, [debouncedValue, refine]);
 
-	useEffect(() => {
-		setSortedHits(
-			hits.sort((a, b) => (a?.name as string).localeCompare(b?.name as string))
-		);
-	}, [hits]);
-
 	return (
 		<Autocomplete
 			fullWidth
 			clearOnBlur
 			clearOnEscape
+			freeSolo
+			filterOptions={x => x}
 			size='small'
 			inputValue={inputValue || ''}
 			noOptionsText='No se han encontrado clientes'
 			onInputChange={(event, value, reason) => {
-				console.log('onInputChange', event, value, reason);
 				setInputValue(value);
 			}}
 			onChange={handleChange}
-			options={sortedHits || []}
-			groupBy={(option) => option.category}
+			options={hits || []}
 			renderOption={(props, option, { selected }) => (
 				<li {...props}>
 					<Box display='flex' alignItems='center'>

@@ -72,6 +72,7 @@ const ProductsAutocompleteSearchBox: FunctionComponent<
 			fullWidth
 			clearOnBlur
 			clearOnEscape
+			filterOptions={x => x}
 			size='small'
 			inputValue={inputValue || ''}
 			noOptionsText='No products found'

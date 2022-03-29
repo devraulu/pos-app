@@ -7,7 +7,7 @@ type Props = { children: ReactNode };
 export default function ClientsInstantSearch({ children }: Props) {
 	return (
 		<InstantSearch searchClient={searchClient} indexName='dev_Clients'>
-			<Configure hitsPerPage={50} filters='deleted:false' />
+			<Configure filters='deleted:false' />
 			{children}
 		</InstantSearch>
 	);
