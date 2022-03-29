@@ -35,6 +35,7 @@ function App() {
 	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
 		requiredClaims: { admin: true },
 	});
+
 	const { signedIn, hasRequiredClaims: isAdmin } = signinCheck || {};
 
 	return isSignedInStatus !== 'loading' ? (
