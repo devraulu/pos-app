@@ -1,6 +1,7 @@
 import {
 	Box,
 	Grid,
+	IconButton,
 	Paper,
 	Table,
 	TableBody,
@@ -15,12 +16,17 @@ import { TAX_RATE, mapCartState } from 'store/checkout/checkout.selectors';
 import { FunctionComponent } from 'react';
 import { formatToCurrency } from 'utils';
 import { useSelector } from 'react-redux';
+import { Delete as DeleteIcon } from '@mui/icons-material';
+import { useAppDispatch } from 'store/hooks';
+import { removeFromCart } from 'store/checkout/checkout.slice';
 
 interface CartProps {}
 
 const Cart: FunctionComponent<CartProps> = () => {
 	const { cartProducts, count, total, subTotal, taxes } =
 		useSelector(mapCartState);
+
+	const dispatch = useAppDispatch();
 	return (
 		<Box
 			display='flex'
@@ -42,22 +48,36 @@ const Cart: FunctionComponent<CartProps> = () => {
 								<TableCell>Cantidad</TableCell>
 								<TableCell>Unidad</TableCell>
 								<TableCell>Suma</TableCell>
+								<TableCell />
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							{cartProducts.length > 0 ? (
-								cartProducts.map(({ name, count, price, objectID }) => (
-									<TableRow key={objectID}>
-										<TableCell>{name}</TableCell>
-										<TableCell align='right'>{count}</TableCell>
-										<TableCell align='right'>
-											{formatToCurrency(price)}
-										</TableCell>
-										<TableCell align='right'>
-											{formatToCurrency(count * price)}
-										</TableCell>
-									</TableRow>
-								))
+								cartProducts.map(
+									({ name, count, price, objectID, ...rest }) => (
+										<TableRow key={objectID}>
+											<TableCell>{name}</TableCell>
+											<TableCell align='right'>{count}</TableCell>
+											<TableCell align='right'>
+												{formatToCurrency(price)}
+											</TableCell>
+											<TableCell align='right'>
+												{formatToCurrency(count * price)}
+											</TableCell>
+											<TableCell>
+												<IconButton
+													aria-label='delete'
+													color='warning'
+													onClick={() => {
+														console.log('remove from cart', rest, objectID);
+														objectID && dispatch(removeFromCart(objectID));
+													}}>
+													<DeleteIcon />
+												</IconButton>
+											</TableCell>
+										</TableRow>
+									)
+								)
 							) : (
 								<TableRow>
 									<TableCell colSpan={4}>
@@ -101,3 +121,4 @@ const Cart: FunctionComponent<CartProps> = () => {
 };
 
 export default Cart;
+
