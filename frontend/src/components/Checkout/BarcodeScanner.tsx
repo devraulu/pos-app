@@ -1,35 +1,50 @@
 import React, { useEffect, useState } from 'react';
 
-import BarcodeScannerComponent from 'react-qr-barcode-scanner';
-import { Dialog } from '@mui/material';
 import { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-
+import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
+import { useAppDispatch } from 'store/hooks';
+import { addToCart } from 'store/checkout/checkout.slice';
+import { getDocByCode } from 'utils';
+import { IProduct } from 'models';
+import useDebounce from 'hooks/useDebounce';
+import { toast } from 'react-toastify';
 type Props = { cssProp?: SerializedStyles; width?: number; height?: number };
 
-export default function BarcodeScanner({
-	width = 500,
-	height = 500,
-	cssProp,
-}: Props) {
+export default function BarcodeScanner({ cssProp }: Props) {
 	const [code, setCode] = useState('');
+	const debouncedCode = useDebounce(code, 1000);
+	const dispatch = useAppDispatch();
 
-	const handleScan = (result: any) => {
-		console.log('Result', result);
+	const getByCode = async (code: string) => {
+		try {
+			const p = await getDocByCode(code);
+
+			dispatch(addToCart({ ...p.data(), objectID: p.id }));
+			toast.success(`${p.data().name} added to cart`);
+		} catch (error) {
+			toast.error(`${code} not found`);
+		}
 	};
-
-	const handleError = () => {};
+	useEffect(() => {
+		if (debouncedCode) {
+			getByCode(debouncedCode);
+		}
+	}, [debouncedCode]);
 
 	return (
 		<div css={cssProp}>
 			<BarcodeScannerComponent
-				width={100}
-				height={100}
+				width={200}
+				height={200}
 				onUpdate={(err, result) => {
-					if (result) console.log('Result', result);
-					else console.log('Error', err);
+					if (result) {
+						setCode(result.getText());
+						console.log(result);
+					}
 				}}
 			/>
 		</div>
 	);
 }
+
