@@ -46,10 +46,7 @@ export default function ClientsDG({
 			headerName: 'Telefono',
 			width: 150,
 		},
-		{
-			field: 'rnc',
-			headerName: 'RNC',
-		},
+
 		{
 			field: 'address',
 			headerName: 'Dirección',
@@ -107,3 +104,4 @@ export default function ClientsDG({
 		</>
 	);
 }
+
