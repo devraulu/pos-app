@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 import useDebounce from 'hooks/useDebounce';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 
 interface BarcodeScannerProps {}
 

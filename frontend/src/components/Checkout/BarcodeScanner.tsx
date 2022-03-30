@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
+import BarcodeScannerComponent from 'react-qr-barcode-scanner';
 import { useAppDispatch } from 'store/hooks';
 import { addToCart } from 'store/checkout/checkout.slice';
 import { getDocByCode } from 'utils';
@@ -13,7 +13,7 @@ type Props = { cssProp?: SerializedStyles; width?: number; height?: number };
 
 export default function BarcodeScanner({ cssProp }: Props) {
 	const [code, setCode] = useState('');
-	const debouncedCode = useDebounce(code, 1000);
+	const debouncedCode = useDebounce(code, 700);
 	const dispatch = useAppDispatch();
 
 	const getByCode = async (code: string) => {
