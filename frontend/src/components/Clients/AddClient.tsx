@@ -19,7 +19,7 @@ export default function AddClient() {
 		try {
 			const docRef = await addDoc(
 				collection(db, 'clients'),
-				formatClient(values)
+				formatClient({ ...values, createdAt: serverTimestamp() })
 			);
 			console.log('docRef:', docRef);
 			toast.success('Se guardo el cliente correctamente');

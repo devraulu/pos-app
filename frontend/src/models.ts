@@ -9,8 +9,8 @@ export type IProduct = {
 	price: number;
 	category: string;
 	img: string;
-	createdAt?: number | string;
-	updatedAt?: number | string;
+	createdAt?: number | string | FieldValue;
+	updatedAt?: number | string | FieldValue;
 	createdBy?: string;
 	deleted: boolean;
 	objectID?: string;
@@ -20,8 +20,8 @@ export type IProduct = {
 
 export type Client = {
 	name: string;
-	createdAt?: number;
-	updatedAt?: number;
+	createdAt?: number | FieldValue;
+	updatedAt?: number | FieldValue;
 	createdBy?: string;
 	email: string;
 	address: string;

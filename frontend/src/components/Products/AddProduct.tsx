@@ -25,7 +25,7 @@ export default function AddProduct() {
 		try {
 			const docRef = await addDoc(
 				collection(db, 'products'),
-				formatProduct(values)
+				formatProduct({ ...values, createdAt: serverTimestamp() })
 			);
 			console.log('docRef:', docRef);
 			toast.success('Se guardo el producto correctamente');

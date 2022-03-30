@@ -63,8 +63,8 @@ export const formatClient = (values: Client) => ({
 	name: values.name.toUpperCase(),
 	address: values.address.toUpperCase(),
 	email: values.email.toLowerCase(),
-	createdAt: serverTimestamp(),
 	updatedAt: serverTimestamp(),
+	deleted: false,
 });
 
 export const formatProduct = (values: IProduct) => ({
@@ -74,6 +74,7 @@ export const formatProduct = (values: IProduct) => ({
 	img:
 		values.img ||
 		'https://via.placeholder.com/150/000000/FFFFFF/?text=' + values.name,
+	deleted: false,
 	updatedAt: serverTimestamp(),
 });
 
