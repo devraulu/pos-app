@@ -11,19 +11,20 @@ const BarcodeScanner: React.FunctionComponent<BarcodeScannerProps> = () => {
 	const [code, setCode] = useState('');
 	const debouncedCode = useDebounce(code, 1000);
 
-	const { setFieldValue } = useFormikContext();
+	const { setFieldValue, setFieldTouched } = useFormikContext();
 
 	useEffect(() => {
 		if (debouncedCode) {
 			setFieldValue('code', debouncedCode);
+			setFieldTouched('code', true);
 			console.log('Encontrado', debouncedCode);
 		}
 	}, [debouncedCode]);
 
 	return (
 		<BarcodeScannerComponent
-			width={80}
-			height={80}
+			width={200}
+			height={200}
 			onUpdate={(err, result) => {
 				if (result) {
 					setCode(result.getText());

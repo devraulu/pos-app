@@ -35,7 +35,7 @@ export default function EditProduct({ id }: Props) {
 	return (
 		<Box sx={{ p: 5 }}>
 			<Typography variant='h2' noWrap>
-				Edit product
+				Editar producto
 			</Typography>
 
 			{!product && !error && (

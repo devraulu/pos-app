@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import FormikTextField from 'components/common/FormikTextField';
 import BarcodeScanner from './BarcodeScanner';
 
@@ -12,11 +13,17 @@ const ProductFormFields: React.FunctionComponent<
 			<FormikTextField name='price' label='Precio' />
 			<FormikTextField name='category' label='Categoria' />
 			<FormikTextField name='img' label='Imagen del producto' />
-			<FormikTextField
-				name='code'
-				label='Codigo de barras'
-				InputProps={{ endAdornment: <BarcodeScanner /> }}
-			/>
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+				}}>
+				<FormikTextField fullWidth name='code' label='Codigo de barras' />
+				<Box ml={2}>
+					<BarcodeScanner />
+				</Box>
+			</Box>
 		</>
 	);
 };

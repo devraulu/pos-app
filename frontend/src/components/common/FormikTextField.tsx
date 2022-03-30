@@ -28,7 +28,11 @@ export default function FormikTextField({
 			onBlur={handleBlur}
 			error={touched[name] && Boolean(errors[name])}
 			helperText={touched[name] && errors[name]}
+			InputLabelProps={{
+				shrink: !!(values as IProduct)[name as keyof IProduct],
+			}}
 			{...rest}
 		/>
 	);
 }
+
