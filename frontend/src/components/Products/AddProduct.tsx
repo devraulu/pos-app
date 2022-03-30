@@ -15,6 +15,7 @@ import { css } from '@emotion/react';
 import { db } from 'firebase-config';
 import { formatProduct } from 'utils';
 import { toast } from 'react-toastify';
+import ProductFormFields from './ProductFormFields';
 
 export default function AddProduct() {
 	const handleSubmit = async (
@@ -45,15 +46,7 @@ export default function AddProduct() {
 			</Typography>
 			<Box sx={{ mt: 3 }}>
 				<Formik
-					initialValues={
-						{
-							category: 'Action',
-							name: 'Earthquake2',
-							price: 46783.12,
-							deleted: true,
-							img: 'http://dummyimage.com/146x100.png/dddddd/000000',
-						} as IProduct
-					}
+					initialValues={{} as IProduct}
 					onSubmit={handleSubmit}
 					validationSchema={ProductSchema}>
 					{({ isValid, submitForm, isSubmitting }) => (
@@ -64,10 +57,7 @@ export default function AddProduct() {
 								gap: 20px;
 								width: 50%;
 							`}>
-							<FormikTextField name='name' label='Nombre' />
-							<FormikTextField name='price' label='Precio' />
-							<FormikTextField name='category' label='Categoria' />
-							<FormikTextField name='img' label='Imagen del producto' />
+							<ProductFormFields />
 							<Button
 								disabled={!isValid || isSubmitting}
 								variant='contained'
@@ -82,3 +72,4 @@ export default function AddProduct() {
 		</Box>
 	);
 }
+

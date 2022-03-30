@@ -10,6 +10,8 @@ import { ProductSchema } from 'schemas';
 import { css } from '@emotion/react';
 import { db } from 'firebase-config';
 import { toast } from 'react-toastify';
+import BarcodeScanner from './BarcodeScanner';
+import ProductFormFields from './ProductFormFields';
 
 type Props = { id: string };
 
@@ -94,10 +96,7 @@ export default function EditProduct({ id }: Props) {
 									gap: 20px;
 									width: 50%;
 								`}>
-								<FormikTextField name='name' label='Nombre' />
-								<FormikTextField name='price' label='Precio' />
-								<FormikTextField name='category' label='Categoria' />
-								<FormikTextField name='img' label='Imagen del producto' />
+								<ProductFormFields />
 								<Button
 									disabled={!isValid || isSubmitting}
 									variant='contained'
@@ -113,3 +112,4 @@ export default function EditProduct({ id }: Props) {
 		</Box>
 	);
 }
+

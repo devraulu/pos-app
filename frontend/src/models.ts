@@ -15,6 +15,7 @@ export type IProduct = {
 	deleted: boolean;
 	objectID?: string;
 	id?: string;
+	code?: string;
 };
 
 export type Client = {
@@ -57,3 +58,4 @@ export interface IOrder {
 	cardInfo?: ICardInfo;
 	status: string;
 }
+

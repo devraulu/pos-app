@@ -13,6 +13,7 @@ export const ProductSchema = yup.object().shape({
 		.min(4, 'Muy corto')
 		.max(100, 'Muy largo')
 		.required('La categoria es requerida'),
+	code: yup.string().required('El codigo de barras es requerido'),
 });
 
 const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
@@ -47,3 +48,4 @@ export const LoginSchema = yup.object().shape({
 	email: yup.string().email().required(),
 	password: yup.string().required(),
 });
+
