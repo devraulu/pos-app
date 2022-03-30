@@ -1,2 +1,2 @@
-# pos-app
+# POS App
 
