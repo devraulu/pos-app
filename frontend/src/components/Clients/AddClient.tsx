@@ -9,6 +9,7 @@ import { css } from '@emotion/react';
 import { db } from 'firebase-config';
 import { formatClient } from 'utils';
 import { toast } from 'react-toastify';
+import ClientsFormFields from './ClientsFormFields';
 
 export default function AddClient() {
 	const handleSubmit = async (
@@ -49,13 +50,7 @@ export default function AddClient() {
 								gap: 20px;
 								width: 50%;
 							`}>
-							<FormikTextField name='name' label='Nombre de la compañía' />
-							<FormikTextField name='email' label='Email' type='email' />
-							<FormikTextField name='phone' label='Teléfono' />
-							<FormikTextField name='rnc' label='RNC' type='number' />
-							<FormikTextField name='address' label='Dirección' />
-							<FormikTextField name='credit_limit' label='Límite de crédito' />
-							<FormikTextField name='balance' label='Balance' />
+							<ClientsFormFields />
 							<Button
 								disabled={!isValid || isSubmitting}
 								variant='contained'
@@ -70,3 +65,4 @@ export default function AddClient() {
 		</Box>
 	);
 }
+
