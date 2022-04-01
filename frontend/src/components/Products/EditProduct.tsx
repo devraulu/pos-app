@@ -1,21 +1,22 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
-import { Form, Formik, FormikValues } from 'formik';
-import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
-import { formatProduct, getDocByID } from 'utils';
+import { Form, Formik } from 'formik';
+import { doc, updateDoc } from 'firebase/firestore';
+import { formatProduct } from 'utils';
 import { useEffect, useState } from 'react';
 
-import FormikTextField from 'components/common/FormikTextField';
 import { IProduct } from 'models';
 import { ProductSchema } from 'schemas';
 import { css } from '@emotion/react';
-import { db } from 'firebase-config';
 import { toast } from 'react-toastify';
-import BarcodeScanner from './BarcodeScanner';
 import ProductFormFields from './ProductFormFields';
+import { useFirestore } from 'reactfire';
+import { useDB } from 'hooks/firebase';
 
 type Props = { id: string };
 
 export default function EditProduct({ id }: Props) {
+	const { db, getDocByID } = useDB();
+
 	const [product, setProduct] = useState<null | IProduct>(null);
 	const [error, setError] = useState<null | string>(null);
 

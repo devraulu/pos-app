@@ -7,8 +7,7 @@ import './index.css';
 import './App.css';
 
 import { Redirect, Router } from '@reach/router';
-import { useEffect, useState } from 'react';
-import { useSigninCheck, useUser } from 'reactfire';
+import { useSigninCheck } from 'reactfire';
 
 import AddClientPage from 'pages/Clients/AddClientPage';
 import AddProductPage from 'pages/Products/AddProductPage';

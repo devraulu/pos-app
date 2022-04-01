@@ -20,7 +20,6 @@ import { useLocation } from '@reach/router';
 
 const pages = [
 	{ name: 'Productos', path: '/products' },
-	{ name: 'Pedidos', path: '/orders' },
 	{ name: 'Clientes', path: '/clients' },
 	{ name: 'Usuarios', path: '/users' },
 ];

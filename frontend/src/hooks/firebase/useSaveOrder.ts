@@ -1,14 +1,14 @@
 import { addDoc, collection } from 'firebase/firestore';
 
 import { IOrder } from 'models';
-import React from 'react';
-import { db } from 'firebase-config';
 import { resetCart } from 'store/checkout/checkout.slice';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store/hooks';
+import { useFirestore } from 'reactfire';
 
 export default function useSaveOrder() {
 	const dispatch = useAppDispatch();
+	const db = useFirestore();
 
 	return async (order: IOrder) => {
 		try {
@@ -22,3 +22,4 @@ export default function useSaveOrder() {
 		}
 	};
 }
+

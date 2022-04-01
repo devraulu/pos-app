@@ -3,7 +3,6 @@ import { FunctionComponent, useState } from 'react';
 
 import { Client } from 'models';
 import { CreditCard as CreditCardIcon } from '@mui/icons-material';
-import { getDocByID } from 'utils';
 import { selectClient } from 'store/checkout/checkout.selectors';
 import { stringAvatar } from 'utils/avatar';
 import { toast } from 'react-toastify';
@@ -55,3 +54,4 @@ const ClientInfo: FunctionComponent<ClientInfoProps> = () => {
 };
 
 export default ClientInfo;
+

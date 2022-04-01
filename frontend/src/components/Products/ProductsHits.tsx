@@ -13,8 +13,8 @@ import {
 
 import { Hit as AlgoliaHit } from '@algolia/client-search';
 import DeleteDialog from '../common/DeleteDialog';
-import { deleteDocByID } from '../../utils';
 import { toast } from 'react-toastify';
+import { useDB } from 'hooks/firebase';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> &
 	UseHitsProps & {
@@ -37,6 +37,8 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 	const [openDialog, setOpenDialog] = useState(false);
 	const [productName, setProductName] = useState('');
 	const [productId, setProductId] = useState('');
+
+	const { deleteDocByID } = useDB();
 
 	const handleDelete = (id: string, productName: string) => {
 		setOpenDialog(true);

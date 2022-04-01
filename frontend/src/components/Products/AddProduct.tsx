@@ -8,16 +8,17 @@ import {
 	setDoc,
 } from 'firebase/firestore';
 
-import FormikTextField from 'components/common/FormikTextField';
 import { IProduct } from 'models';
 import { ProductSchema } from 'schemas';
 import { css } from '@emotion/react';
-import { db } from 'firebase-config';
 import { formatProduct } from 'utils';
 import { toast } from 'react-toastify';
 import ProductFormFields from './ProductFormFields';
+import { useFirestore } from 'reactfire';
 
 export default function AddProduct() {
+	const db = useFirestore();
+
 	const handleSubmit = async (
 		values: IProduct,
 		{ setSubmitting, resetForm }: FormikHelpers<IProduct>

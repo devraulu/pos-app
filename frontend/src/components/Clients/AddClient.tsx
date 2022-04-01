@@ -6,12 +6,14 @@ import { Client } from 'models';
 import { ClientSchema } from 'schemas';
 import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
-import { db } from 'firebase-config';
 import { formatClient } from 'utils';
 import { toast } from 'react-toastify';
 import ClientsFormFields from './ClientsFormFields';
+import { useFirestore } from 'reactfire';
 
 export default function AddClient() {
+	const db = useFirestore();
+
 	const handleSubmit = async (
 		values: Client,
 		{ setSubmitting, resetForm }: FormikHelpers<Client>

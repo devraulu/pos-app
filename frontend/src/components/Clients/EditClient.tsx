@@ -1,20 +1,23 @@
 import { Box, Button, Skeleton, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { doc, updateDoc } from 'firebase/firestore';
-import { formatClient, getDocByID } from 'utils';
+import { formatClient } from 'utils';
 import { useEffect, useState } from 'react';
 
 import { Client } from 'models';
 import { ClientSchema } from 'schemas';
 import FormikTextField from 'components/common/FormikTextField';
 import { css } from '@emotion/react';
-import { db } from 'firebase-config';
 import { toast } from 'react-toastify';
 import ClientsFormFields from './ClientsFormFields';
+import { useFirestore } from 'reactfire';
+import { useDB } from 'hooks/firebase';
 
 type Props = { id: string };
 
 export default function EditClient({ id }: Props) {
+	const { db, getDocByID } = useDB();
+
 	const [client, setClient] = useState<null | Client>(null);
 	const [error, setError] = useState<null | string>(null);
 
