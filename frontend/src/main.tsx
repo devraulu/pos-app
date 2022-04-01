@@ -25,6 +25,7 @@ const theme = createTheme({
 		},
 	},
 	components: {
+		// @ts-ignore
 		MuiLink: { component: LinkBehavior } as LinkProps,
 	},
 });
@@ -44,3 +45,4 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById('root')
 );
+

@@ -24,7 +24,10 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 	hitComponent: Hit,
 }: HitsProps<THit>) {
 	const functions = useFunctions();
-	const getUsers = httpsCallable<User[]>(functions, 'getUsers');
+	const getUsers = httpsCallable<unknown, { users: User[] }>(
+		functions,
+		'getUsers'
+	);
 
 	const [page, setPage] = useState(0);
 	const [users, setUsers] = useState<null | User[]>();
@@ -59,3 +62,4 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 		</>
 	);
 }
+

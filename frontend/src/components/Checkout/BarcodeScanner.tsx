@@ -20,7 +20,7 @@ export default function BarcodeScanner({ cssProp }: Props) {
 		try {
 			const p = await getDocByCode(code);
 
-			dispatch(addToCart({ ...p.data(), objectID: p.id }));
+			dispatch(addToCart({ ...p.data(), objectID: p.id } as IProduct));
 			toast.success(`${p.data().name} added to cart`);
 		} catch (error) {
 			toast.error(`${code} not found`);

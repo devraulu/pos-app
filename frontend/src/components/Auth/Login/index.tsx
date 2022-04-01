@@ -22,7 +22,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 				console.log('User Credentials', user);
 			}
 		} catch (error: unknown) {
-			const { code, message } = error;
+			const { code, message } = error as { code: string; message: string };
 			switch (code) {
 				case 'auth/user-not-found':
 					toast.error('El usuario no existe');
@@ -43,3 +43,4 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 };
 
 export default Login;
+

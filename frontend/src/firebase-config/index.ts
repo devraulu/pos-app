@@ -1,6 +1,7 @@
 import { getFirestore } from 'firebase/firestore';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,4 +21,13 @@ console.log('firebaseConfig:', firebaseConfig);
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
+const appCheck = initializeAppCheck(app, {
+	provider: new ReCaptchaV3Provider('abcdefghijklmnopqrstuvwxy-1234567890abcd'),
+
+	// Optional argument. If true, the SDK automatically refreshes App Check
+	// tokens as needed.
+	isTokenAutoRefreshEnabled: true,
+});
+
 export const db = getFirestore(app);
+

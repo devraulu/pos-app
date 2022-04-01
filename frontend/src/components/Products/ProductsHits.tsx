@@ -18,7 +18,8 @@ import { toast } from 'react-toastify';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> &
 	UseHitsProps & {
-		hitComponent: (props: { hit: THit }) => JSX.Element;
+		// @ts-ignore
+		hitComponent: (props: { hit; handleDelete }) => JSX.Element;
 	};
 
 export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
@@ -100,3 +101,4 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 		</>
 	);
 }
+

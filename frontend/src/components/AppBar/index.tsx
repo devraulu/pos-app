@@ -27,6 +27,7 @@ const pages = [
 
 export default function POSAppBar() {
 	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
+		// @ts-ignore
 		requiredClaims: { admin: true },
 	});
 	const { signedIn, hasRequiredClaims: isAdmin } = signinCheck || {};
@@ -74,3 +75,4 @@ export default function POSAppBar() {
 		</AppBar>
 	);
 }
+

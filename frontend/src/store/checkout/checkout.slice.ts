@@ -16,7 +16,7 @@ export const checkoutSlice = createSlice({
 	name: 'checkout',
 	initialState,
 	reducers: {
-		addToCart: (state, action: PayloadAction<ProductState>) => {
+		addToCart: (state, action: PayloadAction<IProduct>) => {
 			const index = state.products.findIndex(
 				(item) => item.objectID === action.payload.objectID
 			);

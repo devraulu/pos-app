@@ -33,6 +33,7 @@ import UsersPage from 'pages/Users/UsersPage';
 
 function App() {
 	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
+		// @ts-ignore
 		requiredClaims: { admin: true },
 	});
 
@@ -87,3 +88,4 @@ function App() {
 }
 
 export default App;
+

@@ -59,7 +59,7 @@ export default function UsersDG({ hits, nbHits, ...rest }: Props) {
 			type: 'actions',
 			getActions: (params) => [
 				<GridActionsCellItem
-					icon={<DeleteIcon color='danger' />}
+					icon={<DeleteIcon color='error' />}
 					label='Delete'
 					onClick={() => {}}
 				/>,
@@ -89,3 +89,4 @@ export default function UsersDG({ hits, nbHits, ...rest }: Props) {
 		/>
 	);
 }
+
