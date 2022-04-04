@@ -28,10 +28,6 @@ const UserMenu: React.FunctionComponent<UserMenuProps> = () => {
 		setAnchorElUser(null);
 	};
 
-	useEffect(() => {
-		console.log('User', user);
-	}, [user]);
-
 	return (
 		<Box sx={{ flexGrow: 0 }}>
 			<Tooltip title='Open settings'>
@@ -67,3 +63,4 @@ const UserMenu: React.FunctionComponent<UserMenuProps> = () => {
 };
 
 export default UserMenu;
+

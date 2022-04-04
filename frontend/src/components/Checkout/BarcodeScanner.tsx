@@ -42,7 +42,6 @@ export default function BarcodeScanner({ cssProp }: Props) {
 				onUpdate={(err, result) => {
 					if (result) {
 						setCode(result.getText());
-						console.log(result);
 					}
 				}}
 			/>

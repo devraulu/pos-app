@@ -33,7 +33,6 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 		items: [{ value: 30, label: 'Default', default: true }],
 	});
 	const { nbPages, refine, isLastPage } = usePagination();
-	console.log('Results', results);
 	const [openDialog, setOpenDialog] = useState(false);
 	const [productName, setProductName] = useState('');
 	const [productId, setProductId] = useState('');

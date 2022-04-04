@@ -31,7 +31,6 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 
 	const handlePageChange = (page: number) => {
 		setPage(page + 1);
-		console.log('Results', results);
 	};
 
 	useEffect(() => {
@@ -56,3 +55,4 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 		</>
 	);
 }
+

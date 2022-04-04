@@ -41,7 +41,6 @@ const ProductsAutocompleteSearchBox: FunctionComponent<
 		reason: AutocompleteChangeReason,
 		details?: AutocompleteChangeDetails<any> | undefined
 	) => {
-		console.log('handleChange', event, value, reason, details);
 		if (
 			event.type === 'keydown' &&
 			(event as React.KeyboardEvent).key === 'Backspace' &&
@@ -72,12 +71,11 @@ const ProductsAutocompleteSearchBox: FunctionComponent<
 			fullWidth
 			clearOnBlur
 			clearOnEscape
-			filterOptions={x => x}
+			filterOptions={(x) => x}
 			size='small'
 			inputValue={inputValue || ''}
 			noOptionsText='No products found'
 			onInputChange={(event, value, reason) => {
-				console.log('onInputChange', event, value, reason);
 				setInputValue(value);
 			}}
 			onChange={handleChange}
@@ -107,3 +105,4 @@ const ProductsAutocompleteSearchBox: FunctionComponent<
 };
 
 export default ProductsAutocompleteSearchBox;
+

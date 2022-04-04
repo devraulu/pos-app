@@ -17,9 +17,7 @@ const LogoutPage: React.FunctionComponent<LogoutPageProps> = () => {
 			await signOut(auth);
 			navigate('/login');
 			toast.info("You've been logged out!");
-			console.log('User after sign out', user);
 		} catch (error: unknown) {
-			console.log('Error', error);
 			toast.error('Error' + (error as Error).message);
 		}
 	};
@@ -31,3 +29,4 @@ const LogoutPage: React.FunctionComponent<LogoutPageProps> = () => {
 };
 
 export default LogoutPage;
+

@@ -22,7 +22,10 @@ const pages = [
 	{ name: 'Productos', path: '/products' },
 	{ name: 'Clientes', path: '/clients' },
 	{ name: 'Usuarios', path: '/users' },
+	{ name: 'Reportes', path: '/reports' },
 ];
+
+const adminRoutes = ['/reports', '/users'];
 
 export default function POSAppBar() {
 	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
@@ -41,7 +44,8 @@ export default function POSAppBar() {
 					<Box sx={{ flexGrow: 1, ml: 2 }}>
 						{pages.map(
 							({ name, path }, i) =>
-								((isAdmin && name === 'Usuarios') || name !== 'Usuarios') && (
+								((isAdmin && adminRoutes.includes(path)) ||
+									!adminRoutes.includes(path)) && (
 									<Button
 										key={path}
 										href={path}

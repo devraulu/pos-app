@@ -21,7 +21,6 @@ export default function AddUser() {
 			toast.success('Se guardo el cliente correctamente');
 			resetForm();
 		} catch (e) {
-			console.log(e);
 			resetForm();
 			toast.error('Error guardando el cliente');
 		} finally {
@@ -58,3 +57,4 @@ export default function AddUser() {
 		</Box>
 	);
 }
+

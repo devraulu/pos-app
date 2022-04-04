@@ -28,11 +28,9 @@ export default function AddProduct() {
 				collection(db, 'products'),
 				formatProduct({ ...values, createdAt: serverTimestamp() })
 			);
-			console.log('docRef:', docRef);
 			toast.success('Se guardo el producto correctamente');
 			resetForm();
 		} catch (e) {
-			console.log(e);
 			resetForm();
 			toast.error('Error guardando el producto');
 		} finally {

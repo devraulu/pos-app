@@ -37,10 +37,8 @@ export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 		try {
 			const res = await getUsers();
 			setUsers(res.data.users as User[]);
-			console.log('res', res);
 		} catch (e) {
 			toast.error('An error ocurred fetching the users');
-			console.log('Error', e);
 			setError((e as Error).message);
 		}
 	};

@@ -69,7 +69,6 @@ const Cart: FunctionComponent<CartProps> = () => {
 													aria-label='delete'
 													color='warning'
 													onClick={() => {
-														console.log('remove from cart', rest, objectID);
 														objectID && dispatch(removeFromCart(objectID));
 													}}>
 													<DeleteIcon />

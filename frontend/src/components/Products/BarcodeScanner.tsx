@@ -17,7 +17,6 @@ const BarcodeScanner: React.FunctionComponent<BarcodeScannerProps> = () => {
 		if (debouncedCode) {
 			setFieldValue('code', debouncedCode);
 			setFieldTouched('code', true);
-			console.log('Encontrado', debouncedCode);
 		}
 	}, [debouncedCode]);
 
@@ -28,7 +27,6 @@ const BarcodeScanner: React.FunctionComponent<BarcodeScannerProps> = () => {
 			onUpdate={(err, result) => {
 				if (result) {
 					setCode(result.getText());
-					console.log(result);
 				}
 			}}
 		/>
