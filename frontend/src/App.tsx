@@ -29,6 +29,8 @@ import ProductsPage from 'pages/Products/ProductsPage';
 import { ToastContainer } from 'react-toastify';
 import UsersHomePage from 'pages/Users/UsersHomePage';
 import UsersPage from 'pages/Users/UsersPage';
+import ReportsPage from 'pages/Reports/ReportsPage';
+import ReportsHomePage from 'pages/Reports/ReportsHomePage';
 
 function App() {
 	const { status: isSignedInStatus, data: signinCheck } = useSigninCheck({
@@ -37,6 +39,7 @@ function App() {
 	});
 
 	const { signedIn, hasRequiredClaims: isAdmin } = signinCheck || {};
+	console.log('isAdmin', isAdmin);
 
 	return isSignedInStatus !== 'loading' ? (
 		<Box>
@@ -66,6 +69,10 @@ function App() {
 							<EditUserPage path=':id/edit' />
 							<AddUserPage path='new' />
 						</UsersPage>
+
+						<ReportsPage path='reports' isAdmin={isAdmin}>
+							<ReportsHomePage path='/' />
+						</ReportsPage>
 
 						<LogoutPage path='logout' />
 						<Redirect from='/login' to='/' noThrow />
