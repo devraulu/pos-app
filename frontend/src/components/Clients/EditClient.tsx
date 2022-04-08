@@ -80,7 +80,6 @@ export default function EditClient({ id }: Props) {
 									doc(db, 'clients', id),
 									formatClient(values)
 								);
-								console.log('docRef:', docRef);
 								toast.success('Se guardo el producto correctamente');
 							} catch (e) {
 								resetForm();

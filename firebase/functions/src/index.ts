@@ -1,10 +1,11 @@
+import { IOrder, IProduct } from "./models";
 // The Firebase Admin SDK to access Firestore.
 import * as admin from "firebase-admin";
 // The Cloud Functions for Firebase SDK to create Cloud Functions and set up triggers.
 import * as functions from "firebase-functions";
 
 admin.initializeApp();
-
+const db = admin.firestore();
 interface IUser {
   uid: string;
   email: string;
@@ -90,3 +91,38 @@ exports.getUserById = functions.https.onCall(async (data, context) => {
     return error;
   }
 });
+
+exports.getMostSoldProducts = functions.https.onCall(async (data, context) => {
+  if (context.auth?.token.admin) {
+    const limitDate = admin.firestore.Timestamp.fromDate(
+      new Date(data.limitDate)
+    );
+    const products: IProduct[] = [];
+    const orders = await db
+      .collection("orders")
+      .where("createdAt", ">=", limitDate)
+      .get();
+
+    orders.forEach((doc) => {
+      const order: IOrder = doc.data() as IOrder;
+      order.products.forEach((product) => {
+        const index = products.findIndex(
+          (item: IProduct) => item.objectID === product.objectID
+        );
+        if (index > -1) {
+          products[index].count! += 1;
+        } else products.push({ ...product, count: 1 });
+      });
+    });
+
+    return products.sort(
+      (a: IProduct, b: IProduct) => b.count ?? 0 - (a.count ?? 0)
+    );
+  } else return "User is not an admin. Cannot access this data.";
+});
+
+// exports.onCreateOrder = functions.firestore
+// 	.document('orders/{orderId}')
+// 	.onCreate(async (snapshot) => {
+// 		const order = snapshot.data();
+// 	});

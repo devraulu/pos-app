@@ -1,4 +1,4 @@
-import { Box, Pagination } from '@mui/material';
+import { Box, Grid, Pagination } from '@mui/material';
 import { GridCallbackDetails, GridSortModel } from '@mui/x-data-grid';
 import {
 	UseHitsProps,
@@ -9,9 +9,13 @@ import {
 import { useEffect, useState } from 'react';
 
 import { Hit as AlgoliaHit } from '@algolia/client-search';
-import ClientsDG from './ClientsDG';
 import { css } from '@emotion/react';
 import { navigate } from '@reach/router';
+import SalesDG from './SalesDG';
+import { IOrder } from 'models';
+import { collection, query } from 'firebase/firestore';
+import { useFirestore } from 'reactfire';
+import FilterSelect from '../FilterSelect';
 
 export type HitsProps<THit> = React.ComponentProps<'div'> &
 	UseHitsProps & {
@@ -21,36 +25,16 @@ export type HitsProps<THit> = React.ComponentProps<'div'> &
 export function Hits<THit extends AlgoliaHit<Record<string, unknown>>>({
 	hitComponent: Hit,
 }: HitsProps<THit>) {
-	const [page, setPage] = useState(0);
-	const { hits, results } = useHits();
-	const [hpp, setHPP] = useState(50);
-	const configureHPP = useHitsPerPage({
-		items: [{ value: hpp, label: 'Default', default: true }],
-	});
-	const { nbHits, refine } = usePagination();
+	const [hits, setHits] = useState<IOrder[]>([]);
 
-	const handlePageChange = (page: number) => {
-		setPage(page + 1);
-	};
-
-	useEffect(() => {
-		refine(page);
-	}, [page]);
-
-	// const handleSort = (model: GridSortModel, details: GridCallbackDetails) => {};
-
-	const ClientsDGProps = {
+	const SalesDGProps = {
 		hits,
-		nbHits,
-		hitsPerPage: hpp,
-		page,
-		handlePageChange,
 	};
 
 	return (
 		<>
 			<Box sx={{ w: 100, mt: 4 }}>
-				<ClientsDG {...ClientsDGProps} />
+				<SalesDG {...SalesDGProps} />
 			</Box>
 		</>
 	);

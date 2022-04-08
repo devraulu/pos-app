@@ -79,7 +79,6 @@ export default function EditProduct({ id }: Props) {
 									doc(db, 'products', id),
 									formatProduct(values)
 								);
-								console.log('docRef:', docRef);
 								toast.success('Se guardo el producto correctamente');
 							} catch (e) {
 								resetForm();

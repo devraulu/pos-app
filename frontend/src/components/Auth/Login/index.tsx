@@ -19,7 +19,6 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 			if (user) {
 				navigate('/');
 				toast.success('Bienvenido');
-				console.log('User Credentials', user);
 			}
 		} catch (error: unknown) {
 			const { code, message } = error as { code: string; message: string };

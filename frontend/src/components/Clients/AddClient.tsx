@@ -23,11 +23,9 @@ export default function AddClient() {
 				collection(db, 'clients'),
 				formatClient({ ...values, createdAt: serverTimestamp() })
 			);
-			console.log('docRef:', docRef);
 			toast.success('Se guardo el cliente correctamente');
 			resetForm();
 		} catch (e) {
-			console.log(e);
 			resetForm();
 			toast.error('Error guardando el cliente');
 		} finally {

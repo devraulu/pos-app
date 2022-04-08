@@ -4,19 +4,21 @@ import {
 	getDoc,
 	getDocs,
 	query,
+	QueryConstraint,
 	serverTimestamp,
 	updateDoc,
 	where,
 } from 'firebase/firestore';
 import { FixMeLater } from 'models';
+import { useEffect, useState } from 'react';
 import { useFirestore } from 'reactfire';
 
 export const useDB = () => {
 	// const db = {};
 	const db = useFirestore();
 
-	const getDataFromDB = async () => {
-		const querySnapshot = await getDocs(collection(db, 'products'));
+	const getDataFromDB = async (collectionName = 'products') => {
+		const querySnapshot = await getDocs(collection(db, collectionName));
 		const data: FixMeLater[] = [];
 		querySnapshot.forEach((doc) => {
 			data.push(doc.data());
@@ -44,5 +46,32 @@ export const useDB = () => {
 	};
 
 	return { db, getDataFromDB, getDocByID, getDocByCode, deleteDocByID };
+};
+
+export const useCollectionFromDB = (
+	collectionName: string,
+	filters: QueryConstraint[] = []
+) => {
+	const [data, setData] = useState<FixMeLater[]>([]);
+	const db = useFirestore();
+	const getDataFromDB = async () => {
+		const q = query(collection(db, collectionName), ...filters);
+
+		const querySnapshot = await getDocs(q);
+		const data: FixMeLater[] = [];
+		querySnapshot.forEach((doc) => {
+			data.push({ ...doc.data(), id: doc.id });
+		});
+		setData(data);
+	};
+
+	useEffect(() => {
+		getDataFromDB();
+		return () => {
+			setData([]);
+		};
+	}, []);
+
+	return data;
 };
 

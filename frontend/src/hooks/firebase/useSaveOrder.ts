@@ -13,11 +13,9 @@ export default function useSaveOrder() {
 	return async (order: IOrder) => {
 		try {
 			const docRef = await addDoc(collection(db, 'orders'), order);
-			console.log('docRef:', docRef);
 			toast.success('Se efectuó la compra correctamente');
 			dispatch(resetCart());
 		} catch (e) {
-			console.log(e);
 			toast.error('Error efectuando compra');
 		}
 	};

@@ -22,9 +22,9 @@ export function CustomPagination({ page, handlePageChange }: Props) {
 			page={page + 1}
 			shape='rounded'
 			onChange={(event, value) => {
-				console.log('handlePageChange props: ', value - 2);
 				handlePageChange(value - 2);
 			}}
 		/>
 	);
 }
+
