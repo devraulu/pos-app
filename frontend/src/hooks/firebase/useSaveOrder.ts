@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 
-import { IProduct } from 'models';
+import { IOrder } from 'models';
 import { resetCart } from 'store/checkout/checkout.slice';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from 'store/hooks';
