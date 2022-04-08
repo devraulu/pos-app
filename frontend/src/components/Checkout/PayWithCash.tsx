@@ -56,6 +56,7 @@ const PayWithCash: React.FunctionComponent = () => {
 		const order = {
 			products: cartProducts,
 			userID: user?.uid ?? '',
+			userEmail: user?.email ?? '',
 			clientID: client?.id || 'anonymous',
 			taxes,
 			subTotal,
@@ -135,3 +136,4 @@ const PayWithCash: React.FunctionComponent = () => {
 };
 
 export default PayWithCash;
+

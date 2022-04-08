@@ -16,6 +16,7 @@ export type IProduct = {
 	objectID?: string;
 	id?: string;
 	code?: string;
+	count?: number;
 };
 
 export type Client = {
