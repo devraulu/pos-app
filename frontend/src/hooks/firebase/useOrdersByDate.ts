@@ -1,8 +1,5 @@
-import { httpsCallable } from 'firebase/functions';
 import { useEffect, useState } from 'react';
-import { useFunctions } from 'reactfire';
-import * as dayjs from 'dayjs';
-import { IProduct } from 'models';
+import dayjs from 'dayjs';
 import { TimeQueries, timeQueries } from 'utils/timeQueries';
 import { useCollectionFromDB } from '.';
 import { Timestamp, where } from 'firebase/firestore';

@@ -1,7 +1,7 @@
 import { httpsCallable } from 'firebase/functions';
 import { useEffect, useState } from 'react';
 import { useFunctions } from 'reactfire';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { IProduct } from 'models';
 import { TimeQueries, timeQueries } from 'utils/timeQueries';
 

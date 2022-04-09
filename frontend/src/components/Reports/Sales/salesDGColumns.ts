@@ -1,5 +1,5 @@
 import { paymentMethodMap, orderStatusMap } from './../orderPropertyMap';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import {
 	GridActionsColDef,
 	GridColDef,
@@ -23,6 +23,7 @@ const salesDGColumns: Array<GridColDef | GridActionsColDef> = [
 		field: 'userEmail',
 		headerName: 'E-mail del cajero',
 		width: 250,
+		flex: 1,
 	},
 	{
 		field: 'createdAt',
@@ -30,13 +31,14 @@ const salesDGColumns: Array<GridColDef | GridActionsColDef> = [
 		valueFormatter: (params: GridValueFormatterParams) => {
 			return dayjs.unix((params.value as Timestamp).seconds).format('L LT');
 		},
-		minWidth: 150,
+		flex: 1,
 	},
 	{
 		field: 'clientID',
 		headerName: 'Cliente',
 		valueFormatter: (params: GridValueFormatterParams) =>
 			params?.value === 'anonymous' ? 'Anónimo' : params?.value,
+		flex: 1,
 	},
 	{
 		field: 'payment',

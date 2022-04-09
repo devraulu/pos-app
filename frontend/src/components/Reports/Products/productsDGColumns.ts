@@ -1,5 +1,5 @@
 import { paymentMethodMap, orderStatusMap } from '../orderPropertyMap';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import {
 	GridActionsColDef,
 	GridColDef,
@@ -12,18 +12,6 @@ import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 dayjs.extend(LocalizedFormat);
 
 const productsDGColumns: Array<GridColDef | GridActionsColDef> = [
-	// name: string;
-	// price: number;
-	// category: string;
-	// img: string;
-	// createdAt?: number | string | FieldValue;
-	// updatedAt?: number | string | FieldValue;
-	// createdBy?: string;
-	// deleted: boolean;
-	// objectID?: string;
-	// id?: string;
-	// code?: string;
-	// count?: number;
 	{
 		field: 'name',
 		headerName: 'Descripción',
