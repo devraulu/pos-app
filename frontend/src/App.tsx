@@ -11,7 +11,6 @@ import { useSigninCheck } from 'reactfire';
 
 import AddClientPage from 'pages/Clients/AddClientPage';
 import AddProductPage from 'pages/Products/AddProductPage';
-import AddUserPage from 'pages/Users/AddUserPage';
 import { Box } from '@mui/material';
 import CheckoutHomePage from 'pages/Checkout/CheckoutHomePage';
 import CheckoutPage from 'pages/Checkout/CheckoutPage';
@@ -67,7 +66,6 @@ function App() {
 						<UsersPage path='users' isAdmin={isAdmin}>
 							<UsersHomePage path='/' />
 							<EditUserPage path=':id/edit' />
-							<AddUserPage path='new' />
 						</UsersPage>
 
 						<ReportsPage path='reports' isAdmin={isAdmin}>

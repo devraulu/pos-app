@@ -13,11 +13,7 @@ export default function Users() {
 				<Box>
 					<Typography variant='h2'>Usuarios</Typography>
 				</Box>
-				<Box sx={{ ml: 4 }}>
-					<Button href='/users/new' variant='contained'>
-						Nuevo
-					</Button>
-				</Box>
+
 				<Box sx={{ flexGrow: 1, ml: 50 }}>
 					<FilterUsers />
 				</Box>
@@ -26,3 +22,4 @@ export default function Users() {
 		</Box>
 	);
 }
+

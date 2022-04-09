@@ -8,6 +8,7 @@ import {
 	DataGrid,
 	GridActionsCellItem,
 	GridActionsColDef,
+	GridCellValue,
 	GridColDef,
 	GridRenderCellParams,
 	GridRowModel,
@@ -30,29 +31,28 @@ export default function UsersDG({ hits, nbHits, ...rest }: Props) {
 			field: 'displayName',
 			headerName: 'Nombre',
 			sortable: true,
-			minWidth: 250,
+			flex: 1,
 		},
 		{
 			field: 'email',
 			headerName: 'E-mail',
 			minWidth: 200,
+			flex: 1,
 		},
-		{
-			field: 'phone',
-			headerName: 'Telefono',
-			width: 150,
-		},
+
 		{
 			field: 'customClaims.admin',
 			headerName: 'Admin',
 			type: 'boolean',
 			renderCell: (params: GridRenderCellParams<boolean>) =>
 				params.row?.customClaims?.admin ? (
-					<CheckIcon color='primary' />
+					<CheckIcon color='success' />
 				) : (
 					<CloseIcon />
 				),
-			sortable: false,
+			//@ts-ignore
+			sortComparator: (a: GridCellValue, b: GridCellValue) => a === b,
+			flex: 1,
 		},
 		{
 			field: 'actions',
@@ -64,7 +64,7 @@ export default function UsersDG({ hits, nbHits, ...rest }: Props) {
 					onClick={() => {}}
 				/>,
 				<GridActionsCellItem
-					icon={<EditIcon color='primary' />}
+					icon={<EditIcon />}
 					label='Edit'
 					onClick={() => navigate(`/users/${params.id}/edit`)}
 				/>,
