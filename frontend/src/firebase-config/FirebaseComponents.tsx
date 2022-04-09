@@ -27,7 +27,7 @@ const FirebaseComponents: React.FunctionComponent<FirebaseComponentsProps> = ({
 		// @ts-ignore
 		self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
 
-		connectFunctionsEmulator(functions, 'localhost', 5001);
+		// connectFunctionsEmulator(functions, 'localhost', 5001);
 		// connectAuthEmulator(auth, 'http://localhost:9099');
 		// connectFirestoreEmulator(db, 'localhost', 8080);
 	}
