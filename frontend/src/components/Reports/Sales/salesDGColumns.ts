@@ -7,6 +7,9 @@ import {
 } from '@mui/x-data-grid';
 import { Timestamp } from 'firebase/firestore';
 import { formatToCurrency } from 'utils';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+
+dayjs.extend(LocalizedFormat);
 
 const salesDGColumns: Array<GridColDef | GridActionsColDef> = [
 	{
