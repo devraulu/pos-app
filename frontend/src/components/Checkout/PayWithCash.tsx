@@ -4,7 +4,6 @@ import {
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogContentText,
 	DialogTitle,
 	TextField,
 	Typography,
@@ -41,10 +40,12 @@ const PayWithCash: React.FunctionComponent = () => {
 		setSelectedBill(newBill);
 		calculateChange(newBill);
 	};
+
 	const handleReceivedMoney = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const parsedValue = parseInt(e.target.value);
 		const value = isNaN(parsedValue) ? null : parsedValue;
 		if (value && value > 10000000) return;
+		setSelectedBill(0);
 		setReceivedMoney(value);
 		calculateChange(value);
 	};
@@ -63,8 +64,6 @@ const PayWithCash: React.FunctionComponent = () => {
 			total,
 			createdAt: serverTimestamp(),
 			payment: 'cash',
-			// cardNumber: 'xxxxxxxx4242',
-			// nameOnCard: 'John Doe',
 			status: 'finished',
 		};
 
@@ -123,6 +122,10 @@ const PayWithCash: React.FunctionComponent = () => {
 						Cancelar
 					</Button>
 					<Button
+						disabled={
+							(!receivedMoney && selectedBill < total) ||
+							(!selectedBill && receivedMoney! < total)
+						}
 						onClick={() => {
 							handlePay();
 							handleClose();
