@@ -1,7 +1,9 @@
 # POS App
 
 Proyecto alojado en [Vercel](pos-app-dun.vercel.app)
+
 Para acceder al proyecto pueden usar las siguientes credenciales:
+
 Usuario: `guest@guest.com`
 Contraseña: `DnYMJvj-k8qMeGWpLjYoQmP!`
 
