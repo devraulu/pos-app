@@ -1,6 +1,6 @@
-import { Client, IProduct } from 'models';
-import { Field, useFormikContext } from 'formik';
 import { TextField, TextFieldProps } from '@mui/material';
+import { useFormikContext } from 'formik';
+import { IProduct } from 'models';
 
 type Props = {
 	name: string;
@@ -35,4 +35,10 @@ export default function FormikTextField({
 		/>
 	);
 }
+
+// export function FormikInputText(props) {
+// 	const { field, meta, helpers } = useField(props.name);
+
+// 	return <InputText {...field} {...props} {...meta} {...helpers} />;
+// }
 

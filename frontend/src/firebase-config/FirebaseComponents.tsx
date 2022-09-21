@@ -26,6 +26,8 @@ const FirebaseComponents: React.FunctionComponent<FirebaseComponentsProps> = ({
 	if (process.env.NODE_ENV !== 'production') {
 		// @ts-ignore
 		self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+		// self.FIREBASE_APPCHECK_DEBUG_TOKEN =
+		// 	import.meta.env.VITE_APP_CHECK_DEBUG_TOKEN_FROM_CI;
 
 		// connectFunctionsEmulator(functions, 'localhost', 5001);
 		// connectAuthEmulator(auth, 'http://localhost:9099');
